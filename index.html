@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home - RevouFun</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+
+        <style type="text/tailwindcss">
+            @theme {
+                --yellow-brand: #f4d35e;
+                --gaming-black: #121212;
+                --neon-blue: #00d1ff;
+                --purple-glow: #7b61ff;
+                /*Font*/
+                --font-family-orbitron: "Orbitron", sans-serif;
+                --font-family-poppins: "Poppins", sans-serif;
+                --font-family-press-start: "Press Start 2P", cursive;
+            }
+        </style>
+    </head>
+    <body class="bg-(--gaming-black) text-white font-[poppins]">
+        <header class="bg-black text-white">
+            <div class="flex items-center justify-between px-4 py-4 md:px-8">
+                <div
+                    class="text-xl font-bold text-(--yellow-brand) font-[orbitron]"
+                >
+                    Revou Fun
+                </div>
+
+                <!-- Mobile menu toggle button -->
+                <button
+                    id="mobile-toggle"
+                    aria-label="toggle navigation"
+                    class="md:hidden flex flex-col gap-1.5 gap-2"
+                    onclick="
+                        document
+                            .getElementById('nav-mobile')
+                            .classList.toggle('hidden')
+                    "
+                >
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+
+                <nav class="hidden md:flex gap-6 items-center">
+                    <a
+                        href="#Hero"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Home</a
+                    >
+                    <a
+                        href="#games"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Games</a
+                    >
+                    <a
+                        href="#about"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >About Us</a
+                    >
+                    <a
+                        href="#feature"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Features</a
+                    >
+                    <a href="#news" class="hover:text-(--yellow-brand)">News</a>
+                    <button
+                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl hover:brightness-110 transition font-medium"
+                    >
+                        Play Now!
+                    </button>
+                </nav>
+            </div>
+            <!-- Desktop navbar -->
+            <div
+                id="nav-mobile"
+                class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
+            >
+                <a
+                    href="#Hero"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Home</a
+                >
+                <a
+                    href="#games"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Games</a
+                >
+                <a
+                    href="#about"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >About Us</a
+                >
+                <a
+                    href="#feature"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Features</a
+                >
+                <a
+                    href="#news"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >News</a
+                >
+                <button
+                    class="mt-4 bg-(--yellow-brand) text-black py-2 rounded-xl font-medium hover:brightness-110 transition"
+                >
+                    Play Now!
+                </button>
+            </div>
+        </header>
+        <main>
+            <section id="Hero">
+                <div
+                    class="flex flex-col items-center text-center gap-6 mt-12 mx-auto px-4 max-w-3xl"
+                >
+                    <h1
+                        class="text-(--yellow-brand) font-[orbitron] text-4xl md:text-5xl font-bold"
+                    >
+                        Welcome to Revou Fun!
+                    </h1>
+                    <p class="text-gray-400 text-lg">
+                        Your ultimate destination for fun and engaging games.
+                        Explore our collection of exciting games and start
+                        playing today!
+                    </p>
+                    <button
+                        class="bg-(--yellow-brand) text-black px-6 py-3 rounded-xl hover:brightness-110 transition font-medium"
+                    >
+                        Play Now!
+                    </button>
+                </div>
+            </section>
+            <section id="about" class="mt-12 px-4">
+                <div class="max-w-5xl mx-auto">
+                    <h2
+                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                    >
+                        About Us
+                    </h2>
+                    <hr class="border-gray-700 mb-6" />
+                    <div class="flex flex-col md:flex-row gap-10 items-start">
+                        <p class="text-gray-400 text-sm mx-auto px-4 max-w-3xl">
+                            Revou Fun is a gaming platform dedicated to
+                            providing high-quality, engaging games for players
+                            of all ages. Our mission is to create a fun and
+                            inclusive gaming experience that brings joy and
+                            entertainment to everyone. We are passionate about
+                            game development and strive to deliver innovative
+                            and enjoyable games that can be played on any
+                            device.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 md:w-1/2">
+                            <div
+                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                            >
+                                <div
+                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                >
+                                    3+
+                                </div>
+                                <div class="text-gray-400 text-xs mt-1">
+                                    Games Available
+                                </div>
+                            </div>
+                            <div
+                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                            >
+                                <div
+                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                >
+                                    90K+
+                                </div>
+                                <div class="text-gray-400 text-xs mt-1">
+                                    Active Players
+                                </div>
+                            </div>
+                            <div
+                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                            >
+                                <div
+                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                >
+                                    30+
+                                </div>
+                                <div class="text-gray-400 text-xs mt-1">
+                                    Update Released
+                                </div>
+                            </div>
+                            <div
+                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                            >
+                                <div
+                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                >
+                                    99%
+                                </div>
+                                <div class="text-gray-400 text-xs mt-1">
+                                    Player Satisfaction
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="games" class="mt-12 mx-auto px-4">
+                <div class="max-w-5xl mx-auto">
+                    <h2
+                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                    >
+                        Our Games
+                    </h2>
+                    <hr class="border-gray-700 mb-6" />
+                    <div
+                        class="flex justify-center items-stretch gap-5 flex-wrap"
+                    >
+                        <article
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                        >
+                            <figure>
+                                <img
+                                    src=""
+                                    alt=""
+                                    class="w-full h-auto rounded-lg"
+                                />
+                                <figcaption class="text-sm text-gray-400 mt-1">
+                                    By Satria
+                                </figcaption>
+                            </figure>
+                            <h3
+                                class="text-white font-[orbitron] text-base font-semibold mt-3 mb-1"
+                            >
+                                Tic-Tac-Toe
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-2">
+                                A classic strategy game for two players.
+                            </p>
+                            <div class="flex items-center justify-between mt-2">
+                                <p
+                                    class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                >
+                                    Genre: Strategy
+                                </p>
+                                <a
+                                    href="pages/ticTacToe.html"
+                                    class="text-xs text-(--neon-blue) hover:underline transition"
+                                    >Play Now!</a
+                                >
+                            </div>
+                        </article>
+                        <article
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                        >
+                            <figure>
+                                <img
+                                    src=""
+                                    alt=""
+                                    class="w-full h-auto rounded-lg"
+                                />
+                                <figcaption class="text-sm text-gray-400 mt-1">
+                                    By Satria
+                                </figcaption>
+                            </figure>
+                            <h3
+                                class="text-white font-[orbitron] text-base font-semibold mt-3 mb-1"
+                            >
+                                Rock-Paper-Scissors
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-2">
+                                A simple game of chance and strategy.
+                            </p>
+                            <div class="flex items-center justify-between mt-2">
+                            <p
+                                class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                            >
+                                Genre: Strategy
+                            </p>
+                            <a
+                                href="pages/rockPaperScissors.html"
+                                class="text-xs text-(--neon-blue) hover:underline transition"
+                                >Play Now!</a
+                            >
+                            </div>
+                        </article>
+                        <article
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                        >
+                            <figure>
+                                <img
+                                    src="/assets/GuessNumber.png"
+                                    alt="Preview Guess Number"
+                                    class="w-full h-auto rounded-lg"
+                                />
+                                <figcaption class="text-sm text-gray-400 mt-1">
+                                    By Satria
+                                </figcaption>
+                            </figure>
+                            <h3
+                                class="text-white font-[orbitron] text-base font-semibold mt-3 mb-1"
+                            >
+                                Number Guessing Game
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-2">
+                                A fun game where players guess a secret number.
+                            </p>
+                            <div class="flex items-center justify-between mt-2">
+                            <p
+                                class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                            >
+                                Genre: Puzzle
+                            </p>
+                            <a
+                                href="pages/guessingNumber.html"
+                                class="text-xs text-(--neon-blue) hover:underline transition"
+                                >Play Now!</a
+                            >
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <section id="feature" class="mt-12 px-4">
+                <div class="max-w-5xl mx-auto">
+                    <h2
+                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                    >
+                        Features
+                    </h2>
+                    <hr class="border-gray-700 mb-6" />
+                    <div
+                        class="grid grid cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
+                        <div
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                        >
+                            <div class="text-2xl mb-3">👾</div>
+                            <h3
+                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                            >
+                                Cross-Platform
+                            </h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Play on any device - desktop, tablet, or mobile.
+                                No downloads required
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                        >
+                            <div class="text-2xl mb-3">👥</div>
+                            <h3
+                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                            >
+                                Multiplayer Support
+                            </h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Challenge your friends or play against the
+                                computer anytime.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                        >
+                            <div class="text-2xl mb-3">🔁</div>
+                            <h3
+                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                            >
+                                Regular Updates
+                            </h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                New games and features dropped regularly to keep
+                                things fresh.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                        >
+                            <div class="text-2xl mb-3">✨</div>
+                            <h3
+                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                            >
+                                Clean UI
+                            </h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Intuitive and distraction-free interface
+                                designed for the best experience.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                        >
+                            <div class="text-2xl mb-3">🔒</div>
+                            <h3
+                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                            >
+                                Secure & Reliable
+                            </h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Safe gaming environment with reliable uptime you
+                                can count on.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                        >
+                            <div class="text-2xl mb-3">🏆</div>
+                            <h3
+                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                            >
+                                Leaderboards
+                            </h3>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Compete with players worldwide and climb to the
+                                top of the rankings.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="news" class="mt-12 px-4">
+                <div class="max-w-5xl mx-auto">
+                    <h2
+                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                    >
+                        News
+                    </h2>
+                    <hr class="border-gray-700 mb-6" />
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
+                        <article
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                        >
+                            <div
+                                class="bg-[#2a2a2a] h-36 flex items-center justify-center text-4xl"
+                            >
+                                🎲
+                            </div>
+                            <div class="p-4">
+                                <span
+                                    class="text-xs bg-[#00d1ff22] text-(--neon-blue) border bordertext-(--neon-blue) border border-[#00d1ff55] px-2 py-0.5 rounded"
+                                    >Update</span
+                                >
+                                <h3
+                                    class="text-white font-[orbitron] text-sm font-semibold mt-2 mb-1"
+                                >
+                                    New Game Mode Incoming
+                                </h3>
+                                <p
+                                    class="text-gray-400 text-xs leading-relaxed mb-3"
+                                >
+                                    A brand new timed challenge mode is coming
+                                    to all games. Stay tuned for the official
+                                    release date.
+                                </p>
+                                <span class="text-gray-400 text-xs"
+                                    >April 20, 2026</span
+                                >
+                            </div>
+                        </article>
+                        <article
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                        >
+                            <div
+                                class="bg-[#2a2a2a] h-36 flex items-center justify-center text-4xl"
+                            >
+                                🏆
+                            </div>
+                            <div class="p-4">
+                                <span
+                                    class="text-xs bg-[#00d1ff22] text-(--neon-blue) border bordertext-(--neon-blue) border border-[#00d1ff55] px-2 py-0.5 rounded"
+                                    >Event</span
+                                >
+                                <h3
+                                    class="text-white font-[orbitron] text-sm font-semibold mt-2 mb-1"
+                                >
+                                    First Community Tournament
+                                </h3>
+                                <p
+                                    class="text-gray-400 text-xs leading-relaxed mb-3"
+                                >
+                                    Join our first ever Rock-Paper-Scissors
+                                    online tournament. Prizes for top 3 players!
+                                </p>
+                                <span class="text-gray-400 text-xs"
+                                    >April 15, 2026</span
+                                >
+                            </div>
+                        </article>
+                        <article
+                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                        >
+                            <div
+                                class="bg-[#2a2a2a] h-36 flex items-center justify-center text-4xl"
+                            >
+                                🚀
+                            </div>
+                            <div class="p-4">
+                                <span
+                                    class="text-xs bg-[#00d1ff22] text-(--neon-blue) border bordertext-(--neon-blue) border border-[#00d1ff55] px-2 py-0.5 rounded"
+                                    >Launch</span
+                                >
+                                <h3
+                                    class="text-white font-[orbitron] text-sm font-semibold mt-2 mb-1"
+                                >
+                                    Revou Fun is Live!
+                                </h3>
+                                <p
+                                    class="text-gray-400 text-xs leading-relaxed mb-3"
+                                >
+                                    We officially launched with 3 games -
+                                    Tic-Tac-Toe, Rock-Paper-Scissors, Number
+                                    Guessing Game.
+                                </p>
+                                <span class="text-gray-400 text-xs"
+                                    >April 1, 2026</span
+                                >
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <section id="cta" class="mt-12 px-4">
+                <div
+                    class="max-w-3xl mx-auto text-center bg-[#1E1E1E] border border-gray-700 rounded-2xl p-10"
+                >
+                    <div></div>
+                    <h2
+                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                    >
+                        Ready to Play?
+                    </h2>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Join thousands of players and start playing our exciting
+                        games today. No sign-up required — just jump in and have
+                        fun!
+                    </p>
+                    <div class="flex gap-3 justify-center flex-wrap">
+                        <button
+                            class="bg-(--yellow-brand) text-black px-6 py-3 rounded-xl hover:brightness-110 transition font-medium"
+                        >
+                            Play Now!
+                        </button>
+                        <button
+                            class="border border-gray-600 text-white px-6 py-3 rounded-xl hover:border-gray-400 transition text-sm"
+                        >
+                            Browse Games
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="bg-black text-white text-center py-4 mt-12">
+            <div class="text-gray-400 text-sm">
+                &copy; 2026 Satria Pamungkas. All Right Reserved.
+            </div>
+        </footer>
+    </body>
+</html>

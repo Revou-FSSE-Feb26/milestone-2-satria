@@ -1,27 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guessing Number</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Guessing Number</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <style type="text/tailwindcss">
+            @theme {
+                --yellow-brand: #f4d35e;
+                --gaming-black: #121212;
+                --neon-blue: #00d1ff;
+                --purple-glow: #7b61ff;
+                /*Font*/
+                --font-family-orbitron: "Orbitron", sans-serif;
+                --font-family-poppins: "Poppins", sans-serif;
+                --font-family-press-start: "Press Start 2P", cursive;
+            }
+        </style>
+    </head>
+    <body class="bg-(--gaming-black) text-white min-h-screen flex flex-col">
+        <header class="bg-black text-white">
+            <div class="flex items-center justify-between px-4 py-4 md:px-8">
+                <div
+                    class="text-xl font-bold text-(--yellow-brand) font-[orbitron]"
+                >
+                    Revou Fun
+                </div>
 
-    <link rel="stylesheet" href="../css/guessingNumber.css">
-</head>
-<body>
-    <h1>Guessing Number</h1>
+                <!-- Mobile menu toggle button -->
+                <button
+                    id="mobile-toggle"
+                    aria-label="toggle navigation"
+                    class="md:hidden flex flex-col gap-1.5 gap-2"
+                    onclick="
+                        document
+                            .getElementById('nav-mobile')
+                            .classList.toggle('hidden')
+                    "
+                >
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
 
-    <div>
-        <h2>Guess a number between 1 to 100</h2>
-        <input type="number" id="guessInput">
-        <button id="guessButton">Submit Guess</button>
-    </div>
+                <nav class="hidden md:flex gap-6 items-center">
+                    <a
+                        href="../index.html#hero"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Home</a
+                    >
+                    <a
+                        href="../index.html#games"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Games</a
+                    >
+                    <a
+                        href="../index.html#about"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >About Us</a
+                    >
+                    <a
+                        href="../index.html#feature"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Features</a
+                    >
+                    <a
+                        href="../index.html#news"
+                        class="hover:text-(--yellow-brand)"
+                        >News</a
+                    >
+                    <button
+                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl hover:brightness-110 transition font-medium"
+                    >
+                        Play Now!
+                    </button>
+                </nav>
+            </div>
+            <!-- Desktop navbar -->
+            <div
+                id="nav-mobile"
+                class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
+            >
+                <a
+                    href="../index.html#hero"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Home</a
+                >
+                <a
+                    href="../index.html#games"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Games</a
+                >
+                <a
+                    href="../index.html#about"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >About Us</a
+                >
+                <a
+                    href="../index.html#feature"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Features</a
+                >
+                <a
+                    href="../index.html#news"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >News</a
+                >
+                <button
+                    class="mt-4 bg-(--yellow-brand) text-black py-2 rounded-xl font-medium hover:brightness-110 transition"
+                >
+                    Play Now!
+                </button>
+            </div>
+        </header>
 
-    <div id="resultDisplay"></div>
+        <main flex-1 flex items-center justify-center px-4 py-12>
+            <div class="text-center">
+                <div class="text-3xl mb-2"></div>
+                <h1
+                    class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                >
+                    Guessing Number
+                </h1>
+                <p class="text-gray-400 text-sm mt-1">
+                    Guess a number between 1 to 100
+                </p>
+            </div>
 
-    <div id="attemptDisplay">Attempts left: <span id="attemptCount">4</span></div>
+            <div class="flex gap-2">
+                <input
+                    type="number"
+                    id="guessInput"
+                    placeholder="Enter your guess..."
+                    class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
+                />
+                <button
+                    id="guessButton"
+                    class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition"
+                >
+                    Submit Guess
+                </button>
+            </div>
 
-    <div>Score: <span id="scoreDisplay">0</span></div>
+            <div
+                id="resultDisplay"
+                class="text-center text-sm font-medium text-gray-400 min-h-[24px]"
+            ></div>
 
-    <script src="../js/guessingNumber.js"></script>
-</body>
+            <div class="grid grid-cols-2 gap-3">
+                <div
+                    class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                >
+                    <div id="attemptDisplay">
+                        <div class="text-xs text-gray-500 mb-1">
+                            Attempts left
+                        </div>
+                        <div
+                            id="attemptCount"
+                            class="font-[orbitron] text-xl font-bold text-(--neon-blue)"
+                        >
+                            5
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                >
+                    <div class="text-xs text-gray-500 mb-1">Score</div>
+                    <div
+                        id="scoreDisplay"
+                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                    >
+                        0
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-black text-white text-center py-4 mt-12">
+            <div class="text-gray-400 text-sm">
+                &copy; 2026 Satria Pamungkas. All Right Reserved.
+            </div>
+        </footer>
+        <script src="../js/guessingNumber.js"></script>
+    </body>
 </html>

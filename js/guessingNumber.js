@@ -6,7 +6,7 @@ const scoreDisplay = document.getElementById("scoreDisplay");
 const attemptDisplay = document.getElementById("attemptDisplay");
 const attemptCount = document.getElementById("attemptCount");
 let score = 0;
-let attempt = 4;
+let attempt = 5;
 
 guessButton.addEventListener("click",function(){
     const playerGuess = parseInt(guessInput.value);
