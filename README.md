@@ -74,6 +74,12 @@ revou-fun/
 │   ├── guessingNumber.js       # Number Guessing Game logic
 │   ├── rockPaperScissors.js    # Rock Paper Scissors logic
 │   └── ticTacToe.js            # Tic-Tac-Toe logic
+├── assets/
+│   ├─ GuessNumber.png          # image of guess number
+│   ├─ rps.png                  # image of rock paper scissors
+│   ├─ tictactoe.png            # image of tic tac toe
+│   └── index.png               # image of index
+│
 └── README.md
 ```
 
