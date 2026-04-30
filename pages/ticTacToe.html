@@ -1,28 +1,311 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/ticTacToe.css">
-    <title>Tic Tac Toe</title>
-</head>
-<body>
-    <h1>Tic Tac Toe - Game</h1>
-    <div class="container">
-        <div data-index="0" class="box"></div>
-        <div data-index="1" class="box"></div>
-        <div data-index="2" class="box"></div>
-        <div data-index="3" class="box"></div>
-        <div data-index="4" class="box"></div>
-        <div data-index="5" class="box"></div>
-        <div data-index="6" class="box"></div>
-        <div data-index="7" class="box"></div>
-        <div data-index="8" class="box"></div>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <style type="text/tailwindcss">
+            @theme {
+                --yellow-brand: #f4d35e;
+                --gaming-black: #121212;
+                --neon-blue: #00d1ff;
+                --purple-glow: #7b61ff;
+                /*Font*/
+                --font-family-orbitron: "Orbitron", sans-serif;
+                --font-family-poppins: "Poppins", sans-serif;
+                --font-family-press-start: "Press Start 2P", cursive;
+            }
+        </style>
+        <style>
+            .container {
+                width: 300px;
+            }
+            .box {
+                width: 100px;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 2rem;
+                font-weight: bold;
+                border: 1px solid #374141;
+                color: white;
+                transition: backgorund-color 0.2s;
+            }
+            .box:hover {
+                background-color: #2a2a2a;
+            }
+            .box:nth-child(1),
+            .box:nth-child(2),
+            .box:nth-child(3) {
+                border-top: none;
+            }
+            .box:nth-child(7),
+            .box:nth-child(8),
+            .box:nth-child(9) {
+                border-bottom: none;
+            }
+            .box:nth-child(1),
+            .box:nth-child(4),
+            .box:nth-child(7) {
+                border-left: none;
+            }
+            .box:nth-child(3),
+            .box:nth-child(6),
+            .box:nth-child(9) {
+                border-right: none;
+            }
+        </style>
+        <title>Tic Tac Toe</title>
+    </head>
+    <body class="bg-(--gaming-black) text-white min-h-screen flex flex-col">
+        <header class="bg-black text-white">
+            <div class="flex items-center justify-between px-4 py-4 md:px-8">
+                <div
+                    class="text-xl font-bold text-(--yellow-brand) font-[orbitron]"
+                >
+                    Revou Fun
+                </div>
 
-    <div class="status"></div>
-    <button class="restartBtn">Restart 🔁</button>
+                <!-- Mobile menu toggle button -->
+                <button
+                    id="mobile-toggle"
+                    aria-label="toggle navigation"
+                    class="md:hidden flex flex-col gap-1.5 gap-2"
+                    onclick="
+                        document
+                            .getElementById('nav-mobile')
+                            .classList.toggle('hidden')
+                    "
+                >
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
 
-    <script src="../js/ticTacToe.js"></script>
-</body>
+                <nav class="hidden md:flex gap-6 items-center">
+                    <a
+                        href="../index.html#hero"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Home</a
+                    >
+                    <a
+                        href="../index.html#games"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Games</a
+                    >
+                    <a
+                        href="../index.html#about"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >About Us</a
+                    >
+                    <a
+                        href="../index.html#feature"
+                        class="hover:text-(--yellow-brand) transition-colors"
+                        >Features</a
+                    >
+                    <a
+                        href="../index.html#news"
+                        class="hover:text-(--yellow-brand)"
+                        >News</a
+                    >
+                    <button
+                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl hover:brightness-110 transition font-medium"
+                    >
+                        Play Now!
+                    </button>
+                </nav>
+            </div>
+            <!-- Desktop navbar -->
+            <div
+                id="nav-mobile"
+                class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
+            >
+                <a
+                    href="../index.html#hero"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Home</a
+                >
+                <a
+                    href="../index.html#games"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Games</a
+                >
+                <a
+                    href="../index.html#about"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >About Us</a
+                >
+                <a
+                    href="../index.html#feature"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >Features</a
+                >
+                <a
+                    href="../index.html#news"
+                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
+                    >News</a
+                >
+                <button
+                    class="mt-4 bg-(--yellow-brand) text-black py-2 rounded-xl font-medium hover:brightness-110 transition"
+                >
+                    Play Now!
+                </button>
+            </div>
+        </header>
+        <main
+            class="flex-1 flex flex-col items-center justify-center px-4 py-12"
+        >
+            <div
+                id="username"
+                class="bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+            >
+                <div class="text-center">
+                    <h1
+                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                    >
+                        Tic-Tac-Toe
+                    </h1>
+                    <p class="text-gray-400 text-sm mt-1">
+                        Get 3 straight To win!
+                    </p>
+                    <p class="text-gray-400 text-sm mt-1">
+                        Enter Your Username
+                    </p>
+                </div>
+                <div
+                    class="bg-[#121212] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
+                >
+                    <h2 class="font-[orbitron] text-xs text-(--neon-blue) mb-1">
+                        HOW TO PLAY
+                    </h2>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Two Players take turns
+                        <strong class="text-white">X</strong> goes first.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        get
+                        <strong class="text-white">3 in a row</strong>
+                        horizontally, vertically, diagonally to win.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        If all 9 squares are filled with no winner, it's a
+                        <strong class="text-white">tie</strong>.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Win rounds to earn a point and climb the leaderboard!.
+                    </p>
+                </div>
+
+                <div class="flex gap-2">
+                    <input
+                        type="text"
+                        id="usernameInput"
+                        placeholder="Your Username..."
+                        maxlength="16"
+                        class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
+                    />
+                    <button
+                        id="startButton"
+                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition"
+                    >
+                        Start!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Games -->
+            <div
+                id="gameScreen"
+                class="hidden bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+            >
+                <div class="text-center">
+                    <h1
+                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                    >
+                        TIC-TAC-TOE
+                    </h1>
+                    <p id="welcomeText" class="text-gray-400 text-sm mt-1"></p>
+                </div>
+
+                <!-- board -->
+                <div
+                    class="container grid grid-cols-3 bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                >
+                    <div data-index="0" class="box"></div>
+                    <div data-index="1" class="box"></div>
+                    <div data-index="2" class="box"></div>
+                    <div data-index="3" class="box"></div>
+                    <div data-index="4" class="box"></div>
+                    <div data-index="5" class="box"></div>
+                    <div data-index="6" class="box"></div>
+                    <div data-index="7" class="box"></div>
+                    <div data-index="8" class="box"></div>
+                </div>
+
+                <div
+                    class="status bg-[#121212] border border-gray-700 rounded-xl px-6 py-2 text-sm font-medium text-gray-300 min-h-[40px] flex items-center justify-center"
+                >
+                    Player X's turn
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 w-full">
+                    <div
+                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                    >
+                        <div class="text-xs text-gray-500 mb-1">Your Wins</div>
+                        <div
+                            id="winCount"
+                            class="font-[orbitron] text-xl font-bold text-(--neon-blue)"
+                        >
+                            0
+                        </div>
+                    </div>
+                    <div
+                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                    >
+                        <div class="text-xs text-gray-500 mb-1">Draw</div>
+                        <div
+                            id="drawCount"
+                            class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                        >
+                            0
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                    class="restartBtn bg-(--yellow-brand) text-black px-6 py-2 rounded-xl font-medium text-sm hover:brightness-110 active:scale-95 transition-all duration-150 cursor-pointer"
+                >
+                    Restart
+                </button>
+
+                <div class="bg-[#121212] border border-gray-700 rounded-xl p-4">
+                    <h2
+                        class="font-[orbitron] text-xs text-(--yellow-brand) mb-3"
+                    >
+                        LEADERBOARD
+                    </h2>
+                    <ol
+                        id="leaderboardList"
+                        class="flex flex-col gap-2 text-sm"
+                    ></ol>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-black text-white text-center py-4 mt-12">
+            <div class="text-gray-400 text-sm">
+                &copy; 2026 Satria Pamungkas. All Right Reserved.
+            </div>
+        </footer>
+
+        <script src="../js/ticTacToe.js"></script>
+    </body>
 </html>
