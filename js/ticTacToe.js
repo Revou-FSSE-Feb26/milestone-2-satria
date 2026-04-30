@@ -6,62 +6,36 @@ const PLAYER = {
 let boardState =["","","","","","","","",""];
 let currentPlayer = PLAYER.X;
 let isGameOver = false;
-let playerName ="";
 let wins = 0;
 let draws = 0;
 
 
-//winning condition
+//winning condition stores all 8 possible winning combination:
+//3 rows, 3 columns, and 2 diagonals - each as an array of cell indices
 const WINNING_CONDITION =[
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6],
+    [0,1,2], //top row
+    [3,4,5], //middle row
+    [6,7,8], //bottom row
+    [0,3,6], //left column
+    [1,4,7], //middle column
+    [2,5,8], //right column
+    [0,4,8], //diagonal top-left top bottom-right
+    [2,4,6], //diagonal top-right top bottom-left
 ];
 
 //DOM Element
 const CELLS = document.querySelectorAll(".box");
 const statusDisplay = document.querySelector(".status");
 const RESTART_BUTTON = document.querySelector(".restartBtn");
-const username = document.getElementById("username");
-const gameScreen = document.getElementById("gameScreen");
-const usernameInput = document.getElementById("usernameInput");
-const startButton = document.getElementById("startButton");
-const welcomeText = document.getElementById("welcomeText");
-const leaderboardList = document.getElementById("leaderboardList");
 const winCount = document.getElementById("winCount");
 const drawCount = document.getElementById("drawCount");
 
-//username function
-startButton.addEventListener("click", function(){
-    const name = usernameInput.value.trim();
-
-    if(name ===""){
-        usernameInput.style.borderColor = "#f87171"
-        usernameInput.placeholder = "Please enter a username!";
-        return
-    }
-
-    playerName = name;
-    startGame();
-});
-
-usernameInput.addEventListener("keydown", function(e){
-    if(e.key === "Enter") startButton.click();
-});
-
 function startGame(){
-    username.classList.add("hidden");
-    gameScreen.classList.remove("hidden");
-    welcomeText.textContent = `Good luck, ${playerName}!`
+    showGameScreen();
     //Game Init
     statusDisplay.textContent = `Player ${currentPlayer}'s turn`
 
-    renderLeaderboard();
+    renderLeaderboard("tttLeaderboard", leaderboardList);
 }
 
 //Event listener on Every box
@@ -80,15 +54,16 @@ RESTART_BUTTON.addEventListener("click", function(){
 //Games Function
 function handleCellClick(cellIndex){
 
-    //disable clicking box when the game is over
+    //disable clicking box when the game is over or the cell is taken
     if(isGameOver || boardState[cellIndex] !== ""){
         return;
     }
 
-    //update board and display
+    //step 1: Update board state array and render the symbol in the cell
     boardState[cellIndex] = currentPlayer;
     CELLS[cellIndex].textContent = currentPlayer;
 
+    //step 2: Apply player color - X gets blue, O get purple
     switch (currentPlayer){
         case PLAYER.X:
             CELLS[cellIndex].style.color = "#00d1ff";
@@ -98,26 +73,30 @@ function handleCellClick(cellIndex){
             break;
     }
 
-    //check for winner
+    //Step 3: Check if the current move resulted in a win
     const WINNER = checkWinner();
 
     if(WINNER){
+        //win detected - end game, highlight winning cell, update score
         isGameOver = true;
         statusDisplay.textContent = `Player ${currentPlayer} wins!`;
         highlightWinningCells(WINNER);
 
+        //only count wins for Player X
         if(currentPlayer === PLAYER.X){
             wins++;
             winCount.textContent = wins;
-            saveScore(playerName, wins);
-            renderLeaderboard();
+            saveScore(playerName, wins, "tttLeaderboard");
+            renderLeaderboard("tttLeaderboard", leaderboardList);
         }
     }else if(boardState.every(cell => cell !== "")){
+        //Step 4: All cells filled with no winner - It's a draw
         isGameOver = true;
         draws++;
         drawCount.textContent = draws;
         statusDisplay.textContent = `It's a draw!`;
     }else {
+        //Step 5: No winner yet - switch to the other player
         currentPlayer = currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X;
         statusDisplay.textContent = `Player ${currentPlayer} turn`;
     }
@@ -155,48 +134,5 @@ function restartGame(){
         cell.style.backgroundColor= "";   
     });
 
-    statusDisplay.textContent = `Player ${currentPlayer} turns`;
-}
-
-//local storage & leader board
-
-function saveScore(name, newScore){
-    const leaderboard = getLeaderboard();
-
-    const existingIndex = leaderboard.findIndex(entry => entry.name === name);
-
-    if(existingIndex !== -1){
-        if(newScore > leaderboard[existingIndex].score){
-            leaderboard[existingIndex].score = newScore;
-        }
-    }else{
-        leaderboard.push({name, score: newScore});
-    }
-
-    leaderboard.sort((a,b)=> b.score - a.score);
-    const top5 = leaderboard.slice(0,5);
-
-    localStorage.setItem("tttLeaderboard", JSON.stringify(top5))
-}
-
-function getLeaderboard(){
-    const data = localStorage.getItem("tttLeaderboard");
-    return data ? JSON.parse(data) : [];
-}
-
-function renderLeaderboard(){
-    const leaderboard = getLeaderboard();
-    const medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣"];
-
-    if(leaderboard.length === 0){
-        leaderboardList.innerHTML = `<li class="text-gray-600 text-xs text-center">No scores yet. Be the First!</li>`;
-        return
-    }
-
-    leaderboardList.innerHTML = leaderboard.map((entry,index) => `
-        <li class="flex items-center justify-between bg-[#1E1E1E] px-3 py-1.5 rounded-lg">
-            <span class="text-gray-300">${medals[index]} ${entry.name}</span>
-            <span class="font-[orbitron] text-(--yellow-brand) text-sm font-bold">${entry.score} pts</span>
-        </li>
-    `).join("");
+    statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
 }

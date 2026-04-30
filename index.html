@@ -39,11 +39,6 @@
                     id="mobile-toggle"
                     aria-label="toggle navigation"
                     class="md:hidden flex flex-col gap-1.5 gap-2"
-                    onclick="
-                        document
-                            .getElementById('nav-mobile')
-                            .classList.toggle('hidden')
-                    "
                 >
                     <span class="block w-6 h-0.5 bg-white"></span>
                     <span class="block w-6 h-0.5 bg-white"></span>
@@ -83,6 +78,7 @@
             <div
                 id="nav-mobile"
                 class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
+                style="display: none;"
             >
                 <a
                     href="#Hero"
@@ -277,16 +273,16 @@
                                 A simple game of chance and strategy.
                             </p>
                             <div class="flex items-center justify-between mt-2">
-                            <p
-                                class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
-                            >
-                                Genre: Strategy
-                            </p>
-                            <a
-                                href="pages/rockPaperScissors.html"
-                                class="text-xs text-(--neon-blue) hover:underline transition"
-                                >Play Now!</a
-                            >
+                                <p
+                                    class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                >
+                                    Genre: Strategy
+                                </p>
+                                <a
+                                    href="pages/rockPaperScissors.html"
+                                    class="text-xs text-(--neon-blue) hover:underline transition"
+                                    >Play Now!</a
+                                >
                             </div>
                         </article>
                         <article
@@ -311,16 +307,16 @@
                                 A fun game where players guess a secret number.
                             </p>
                             <div class="flex items-center justify-between mt-2">
-                            <p
-                                class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
-                            >
-                                Genre: Puzzle
-                            </p>
-                            <a
-                                href="pages/guessingNumber.html"
-                                class="text-xs text-(--neon-blue) hover:underline transition"
-                                >Play Now!</a
-                            >
+                                <p
+                                    class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                >
+                                    Genre: Puzzle
+                                </p>
+                                <a
+                                    href="pages/guessingNumber.html"
+                                    class="text-xs text-(--neon-blue) hover:underline transition"
+                                    >Play Now!</a
+                                >
                             </div>
                         </article>
                     </div>
@@ -562,5 +558,6 @@
                 &copy; 2026 Satria Pamungkas. All Right Reserved.
             </div>
         </footer>
+        <script src="js/nav.js"></script>
     </body>
 </html>
