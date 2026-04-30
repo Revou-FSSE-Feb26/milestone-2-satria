@@ -120,65 +120,140 @@
             </div>
         </header>
 
-        <main flex-1 flex items-center justify-center px-4 py-12>
-            <div class="text-center">
-                <div class="text-3xl mb-2"></div>
-                <h1
-                    class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
-                >
-                    Guessing Number
-                </h1>
-                <p class="text-gray-400 text-sm mt-1">
-                    Guess a number between 1 to 100
-                </p>
-            </div>
-
-            <div class="flex gap-2">
-                <input
-                    type="number"
-                    id="guessInput"
-                    placeholder="Enter your guess..."
-                    class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
-                />
-                <button
-                    id="guessButton"
-                    class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition"
-                >
-                    Submit Guess
-                </button>
-            </div>
-
+        <main class="flex flex-col items-center justify-center px-4 py-12">
+            <!--Username-->
             <div
-                id="resultDisplay"
-                class="text-center text-sm font-medium text-gray-400 min-h-[24px]"
-            ></div>
+                id="username"
+                class="bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+            >
+                <div class="text-center">
+                    <h1
+                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                    >
+                        Guessing Number
+                    </h1>
+                    <p class="text-gray-400 text-sm mt-1">
+                        Guess a number between 1 to 100
+                    </p>
 
-            <div class="grid grid-cols-2 gap-3">
+                    <p class="text-gray-400 text-sm mt-1">
+                        Enter Your Username
+                    </p>
+                </div>
+
                 <div
-                    class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                    class="bg-[#121212] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
                 >
-                    <div id="attemptDisplay">
-                        <div class="text-xs text-gray-500 mb-1">
-                            Attempts left
+                    <h2 class="font-[orbitron] text-xs text-(--neon-blue) mb-1">
+                        HOW TO PLAY
+                    </h2>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        A random number between
+                        <strong class="text-white">1 and 100</strong> is
+                        generated.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        If you guess is too low or too high, you'll get a hint.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        You have
+                        <strong class="text-white">5 Attempts</strong> to guess
+                        correctly.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Guess it right to earn a point and beat the
+                        leaderboard!.
+                    </p>
+                </div>
+
+                <div class="flex gap-2">
+                    <input
+                        type="text"
+                        id="usernameInput"
+                        placeholder="Your Username..."
+                        maxlength="16"
+                        class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
+                    />
+                    <button
+                        id="startButton"
+                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition"
+                    >
+                        Start!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Games -->
+            <div
+                id="gameScreen"
+                class="hidden bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+            >
+                <div class="text-center">
+                    <h1
+                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                    >
+                        Guessing Number
+                    </h1>
+                    <p id="welcomeText" class="text-gray-400 text-sm mt-1"></p>
+                </div>
+                <div class="flex gap-2">
+                    <input
+                        type="number"
+                        id="guessInput"
+                        placeholder="Enter your guess..."
+                        class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
+                    />
+                    <button
+                        id="guessButton"
+                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition"
+                    >
+                        Submit Guess
+                    </button>
+                </div>
+
+                <div
+                    id="resultDisplay"
+                    class="text-center text-sm font-medium text-gray-400 min-h-[24px]"
+                ></div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div
+                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                    >
+                        <div id="attemptDisplay">
+                            <div class="text-xs text-gray-500 mb-1">
+                                Attempts left
+                            </div>
+                            <div
+                                id="attemptCount"
+                                class="font-[orbitron] text-xl font-bold text-(--neon-blue)"
+                            >
+                                5
+                            </div>
                         </div>
+                    </div>
+                    <div
+                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                    >
+                        <div class="text-xs text-gray-500 mb-1">Score</div>
                         <div
-                            id="attemptCount"
-                            class="font-[orbitron] text-xl font-bold text-(--neon-blue)"
+                            id="scoreDisplay"
+                            class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
                         >
-                            5
+                            0
                         </div>
                     </div>
                 </div>
-                <div
-                    class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
-                >
-                    <div class="text-xs text-gray-500 mb-1">Score</div>
-                    <div
-                        id="scoreDisplay"
-                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                <div class="bg-[#121212] border border-gray-700 rounded-xl p-4">
+                    <h2
+                        class="font-[orbitron] text-xs text-(--yellow-brand) mb-3"
                     >
-                        0
-                    </div>
+                        LEADERBOARD
+                    </h2>
+                    <ol
+                        id="leaderboardList"
+                        class="flex flex-col gap-2 text-sm"
+                    ></ol>
                 </div>
             </div>
         </main>
