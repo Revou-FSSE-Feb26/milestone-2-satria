@@ -46,11 +46,6 @@
                     id="mobile-toggle"
                     aria-label="toggle navigation"
                     class="md:hidden flex flex-col gap-1.5 gap-2"
-                    onclick="
-                        document
-                            .getElementById('nav-mobile')
-                            .classList.toggle('hidden')
-                    "
                 >
                     <span class="block w-6 h-0.5 bg-white"></span>
                     <span class="block w-6 h-0.5 bg-white"></span>
@@ -94,6 +89,7 @@
             <div
                 id="nav-mobile"
                 class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
+                style="display: none;"
             >
                 <a
                     href="../index.html#hero"
@@ -294,6 +290,9 @@
                 &copy; 2026 Satria Pamungkas. All Right Reserved.
             </div>
         </footer>
+        <script src="../js/nav.js"></script>
+        <script src="../js/username.js"></script>
+        <script src="../js/leaderboard.js"></script>
         <script src="../js/rockPaperScissors.js"></script>
     </body>
 </html>
