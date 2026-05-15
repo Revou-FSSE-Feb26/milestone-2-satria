@@ -8,6 +8,7 @@ let currentPlayer = PLAYER.X;
 let isGameOver = false;
 let wins = 0;
 let draws = 0;
+let aiMode =false;
 
 
 //winning condition stores all 8 possible winning combination:
@@ -29,13 +30,29 @@ const statusDisplay = document.querySelector(".status");
 const RESTART_BUTTON = document.querySelector(".restartBtn");
 const winCount = document.getElementById("winCount");
 const drawCount = document.getElementById("drawCount");
+const aiToggle = document.getElementById("aiToggle");
+const aiToggleLabel = document.getElementById("aiToggleLabel");
+const allTimeWins = document.getElementById("allTimeWins");
 
 function startGame(){
     showGameScreen();
     //Game Init
-    statusDisplay.textContent = `Player ${currentPlayer}'s turn`
+    statusDisplay.textContent = aiMode ? "Your Turn (X)" : `Player ${currentPlayer}'s turn`;
+
+    const leaderboard = getLeaderboard("tttLeaderboard")
+    const entry = leaderboard.find(e => e.name === playerName);
+    allTimeWins.textContent = entry ? entry.score : 0;
 
     renderLeaderboard("tttLeaderboard", leaderboardList);
+}
+
+//AI Toggle
+if(aiToggle){
+    aiToggle.addEventListener("change", function(){
+        aiMode = this.checked;
+        aiToggleLabel.textContent = aiMode ? "vs AI (you are X)" : "vs Player";
+        restartGame();
+    });
 }
 
 //Event listener on Every box
@@ -59,9 +76,19 @@ function handleCellClick(cellIndex){
         return;
     }
 
+    //In AI mode, ignore clicks when it's O turn
+    if(aiMode && currentPlayer === PLAYER.O){
+        return;
+    }
+
+    placeSymbol(cellIndex, currentPlayer);
+}
+
+function placeSymbol(cellIndex, player){
     //step 1: Update board state array and render the symbol in the cell
-    boardState[cellIndex] = currentPlayer;
+    boardState[cellIndex] = player;
     CELLS[cellIndex].textContent = currentPlayer;
+    CELLS[cellIndex].setAttribute("data-symbol", player);
 
     //step 2: Apply player color - X gets blue, O get purple
     switch (currentPlayer){
@@ -79,15 +106,19 @@ function handleCellClick(cellIndex){
     if(WINNER){
         //win detected - end game, highlight winning cell, update score
         isGameOver = true;
-        statusDisplay.textContent = `Player ${currentPlayer} wins!`;
+        statusDisplay.textContent = `Player ${player} wins!`;
         highlightWinningCells(WINNER);
 
         //only count wins for Player X
-        if(currentPlayer === PLAYER.X){
+        if(player === PLAYER.X){
             wins++;
             winCount.textContent = wins;
             saveScore(playerName, wins, "tttLeaderboard");
             renderLeaderboard("tttLeaderboard", leaderboardList);
+
+            const leaderboard = getLeaderboard("tttLeaderboard")
+            const entry = leaderboard.find(e => e.name === playerName);
+            allTimeWins.textContent = entry ? entry.score : 0;
         }
     }else if(boardState.every(cell => cell !== "")){
         //Step 4: All cells filled with no winner - It's a draw
@@ -96,17 +127,23 @@ function handleCellClick(cellIndex){
         drawCount.textContent = draws;
         statusDisplay.textContent = `It's a draw!`;
     }else {
-        //Step 5: No winner yet - switch to the other player
+        //Step 5: No winner yet - switch to the AI
         currentPlayer = currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X;
-        statusDisplay.textContent = `Player ${currentPlayer} turn`;
+        statusDisplay.textContent = aiMode
+            ? (currentPlayer === PLAYER.O ? "AI is thinking..." : "Your turn (X)") 
+            : `Player ${currentPlayer}'s turn`;
+        
+        // Let AI move if it's O turn in AI mode
+        if(aiMode && currentPlayer === PLAYER.O && !isGameOver){
+            setTimeout(doAiMove, 350);
+        }
     }
 }
 
 
 //function check winner
 function checkWinner(){
-    for (let i=0; i < WINNING_CONDITION.length; i++) {
-        const [a,b,c] = WINNING_CONDITION[i];
+    for (const [a,b,c] of WINNING_CONDITION) {
         if(boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]){
             return [a,b,c];
         } 
@@ -132,7 +169,72 @@ function restartGame(){
         cell.textContent = ""; 
         cell.style.color= "white";
         cell.style.backgroundColor= "";   
+        cell.removeAttribute("data-symbol");
     });
 
-    statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+    statusDisplay.textContent = aiMode ? "Your turn (X)" : `Player ${currentPlayer}'s turn`;
+}
+
+//function for AI
+function doAiMove(){
+    if(isGameOver) return;
+    const cellIndex = getBestMove();
+    if(cellIndex !== -1) placeSymbol(cellIndex, PLAYER.O);
+}
+
+function getBestMove(){
+    let bestScore = -Infinity;
+    let bestIndex = -1;
+
+    for(let i=0; i < 9; i++){
+        if(boardState[i] ===""){
+            boardState[i] = PLAYER.O;
+            const score = minimax(boardState, 0, false);
+            boardState[i] = "";
+            if(score > bestScore){
+                bestScore = score;
+                bestIndex = i;
+            }
+        }
+    }
+    return bestIndex;
+}
+
+function minimax(board, depth, isMaximizing){
+    const result = evaluateBoard(board);
+    if(result !== null) return result;
+
+    if(isMaximizing){
+        //AI (O) maximize
+        let best = -Infinity;
+        for(let i = 0; i < 9; i++){
+            if(board[i] ===""){
+                board[i] = PLAYER.O;
+                best = Math.max(best, minimax(board, depth + 1, false));
+                board[i] ="";
+            }
+        }
+        return best;
+    } else {
+        // Humans (X) minimises from AI's Prespective
+        let best = Infinity;
+        for(let i = 0; i < 9; i++){
+            if(board[i] ===""){
+                board[i] = PLAYER.X;
+                best = Math.min(best, minimax(board, depth + 1, true));
+                board[i] ="";
+            }
+        }
+        return best;
+    }
+}
+
+function evaluateBoard(board){
+    for (const [a, b, c] of WINNING_CONDITION) {
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a] === PLAYER.O ? 10 : -10;
+        }
+    }
+    if (board.every(cell => cell !== "")) return 0; //draw
+    return null; //game not over
 }

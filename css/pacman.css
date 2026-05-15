@@ -1,0 +1,159 @@
+/* ============================================================
+   pacman.css — Custom styles for Pac-Man game
+   ============================================================ */
+
+:root {
+  --yellow-brand: #f4d35e;
+  --deep-dark-blue: #0b0f1a;
+  --cyan: #00e5ff;
+  --purple-glow: #7b61ff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--deep-dark-blue);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none; z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed; top: -10%; left: 50%;
+  transform: translateX(-50%);
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(123,97,255,.15) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.scanlines {
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.07) 2px, rgba(0,0,0,.07) 4px);
+  pointer-events: none; z-index: 1;
+}
+
+main { position: relative; z-index: 2; }
+
+.title-glow {
+  text-shadow: 0 0 20px var(--cyan), 0 0 60px rgba(0,229,255,.4);
+}
+
+#canvas-wrapper {
+  position: relative;
+  display: inline-block;
+  border: 2px solid rgba(0,229,255,.25);
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0,229,255,.15), inset 0 0 40px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+
+#game-canvas { display: block; background: #000; }
+
+#overlay {
+  position: absolute; inset: 0;
+  background: rgba(11,15,26,.92);
+  backdrop-filter: blur(6px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1.2rem; z-index: 10;
+}
+#overlay.hidden { display: none; }
+
+.overlay-emoji { font-size: 3.5rem; }
+
+.overlay-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem; letter-spacing: .1em;
+  text-shadow: 0 0 20px var(--cyan), 0 0 50px rgba(0,229,255,.4);
+  color: var(--cyan);
+}
+
+.overlay-sub {
+  font-family: "Press Start 2P", system-ui;
+  font-size: .6rem; color: rgba(255,255,255,.5); letter-spacing: .1em;
+}
+
+.btn-primary {
+  font-family: "Press Start 2P", system-ui; font-size: .65rem;
+  background: linear-gradient(135deg, var(--purple-glow), #5a44cc);
+  border: none; border-radius: 8px; padding: .85rem 2rem;
+  cursor: pointer; color: #fff; letter-spacing: .06em;
+  transition: box-shadow .2s, transform .15s;
+}
+.btn-primary:hover { box-shadow: 0 0 24px rgba(123,97,255,.7); transform: translateY(-2px); }
+
+.hud {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; max-width: 560px; padding: .5rem 0;
+}
+.hud-item { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+.hud-label {
+  font-family: "Press Start 2P", system-ui; font-size: .45rem;
+  color: rgba(0,229,255,.6); letter-spacing: .12em; text-transform: uppercase;
+}
+.hud-value {
+  font-family: "Bebas Neue", sans-serif; font-size: 1.8rem;
+  color: var(--yellow-brand); text-shadow: 0 0 10px rgba(244,211,94,.4); line-height: 1;
+}
+.lives-row { display: flex; gap: .4rem; align-items: center; }
+.life-icon { font-size: 1rem; filter: drop-shadow(0 0 4px var(--yellow-brand)); }
+
+.leaderboard-box {
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 1rem; width: 100%; max-width: 560px;
+}
+
+.card {
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 1rem; padding: 2rem; width: 100%; max-width: 420px;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+
+.how-to-box {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: .75rem; padding: 1rem; display: flex; flex-direction: column; gap: .5rem;
+}
+.how-to-box h2 { font-family: "Bebas Neue", sans-serif; font-size: .85rem; color: var(--cyan); letter-spacing: .1em; }
+.how-to-box p  { font-family: "Inter", sans-serif; font-size: .75rem; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+.input-row { display: flex; gap: .5rem; }
+.input-row input {
+  flex: 1; background: #121212; border: 1px solid #444; border-radius: .75rem;
+  padding: .6rem 1rem; color: #fff; font-size: .85rem; font-family: "Inter", sans-serif;
+  outline: none; transition: border-color .2s;
+}
+.input-row input:focus { border-color: var(--cyan); }
+.input-row input.error  { border-color: #f87171; }
+
+.btn-start {
+  background: var(--yellow-brand); color: #000; border: none; border-radius: .75rem;
+  padding: .6rem 1.2rem; font-weight: 700; font-size: .85rem;
+  font-family: "Inter", sans-serif; cursor: pointer; transition: filter .2s; white-space: nowrap;
+}
+.btn-start:hover { filter: brightness(1.1); }
+
+#mobile-controls { display: none; gap: .5rem; flex-direction: column; align-items: center; margin-top: .5rem; }
+@media (max-width: 640px) { #mobile-controls { display: flex; } }
+.ctrl-row { display: flex; gap: .5rem; }
+.ctrl-btn {
+  font-family: "Press Start 2P", system-ui; font-size: .7rem;
+  width: 3rem; height: 3rem; border: 2px solid rgba(0,229,255,.35);
+  border-radius: 8px; background: rgba(0,229,255,.06); color: #fff;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .15s, box-shadow .15s; user-select: none;
+}
+.ctrl-btn:active { background: rgba(0,229,255,.22); box-shadow: 0 0 12px rgba(0,229,255,.5); }
+
+@keyframes pulse-glow { 0%,100%{opacity:1} 50%{opacity:.4} }
+.blink { animation: pulse-glow .7s ease infinite; }

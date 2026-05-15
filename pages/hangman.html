@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hangman — Arcade Edition</title>
+
+        <!-- Match your project's CSS structure -->
+        <link rel="stylesheet" href="../css/output.css" />
+        <link rel="stylesheet" href="../css/hangman.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Tailwind CDN with brand tokens -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            "yellow-brand": "#f4d35e",
+                            "deep-dark": "#0b0f1a",
+                            "cyan-glow": "#00e5ff",
+                            "purple-glow": "#7b61ff",
+                        },
+                        fontFamily: {
+                            neue: ['"Bebas Neue"', "sans-serif"],
+                            inter: ['"Inter"', "sans-serif"],
+                            press: ['"Press Start 2P"', "system-ui"],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+
+    <body class="bg-deep-dark text-white min-h-screen flex flex-col font-inter">
+        <!-- Shared site header (matches your other pages) -->
+        <header id="site-header" class="bg-black text-white"></header>
+
+        <!-- Retro scanline overlay -->
+        <div class="scanlines" aria-hidden="true"></div>
+
+        <!-- ══════════════════════════════════════
+             Win / Lose Result Overlay
+        ══════════════════════════════════════ -->
+        <div
+            id="overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="overlay-title"
+        >
+            <div
+                class="overlay-card rounded-2xl p-10 text-center flex flex-col gap-6"
+            >
+                <p id="overlay-emoji" class="text-6xl">🎉</p>
+                <h2
+                    id="overlay-title"
+                    class="font-neue text-5xl title-glow text-cyan-glow"
+                >
+                    YOU WON!
+                </h2>
+                <p
+                    id="overlay-word"
+                    class="font-inter text-sm text-white/60"
+                ></p>
+                <button class="btn-primary mx-auto" id="play-again-btn">
+                    PLAY AGAIN
+                </button>
+            </div>
+        </div>
+
+        <main class="flex-1 flex flex-col items-center px-4 py-8 gap-8">
+            <!-- ══════════════════════════════════════
+                 Page Title
+            ══════════════════════════════════════ -->
+            <header class="flex flex-col items-center gap-1">
+                <p class="font-press text-cyan-glow text-[8px]">
+                    // hang · man //
+                </p>
+                <h1
+                    class="font-neue text-7xl md:text-8xl tracking-widest title-glow text-cyan-glow"
+                >
+                    HANGMAN
+                </h1>
+                <p class="font-press text-xs text-purple-glow opacity-70">
+                    — arcade edition —
+                </p>
+            </header>
+
+            <!-- ══════════════════════════════════════
+                 SCREEN 1: Username Entry
+            ══════════════════════════════════════ -->
+            <section
+                id="username-screen"
+                class="bg-[#FFFFFF05] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+                aria-label="Enter username to start"
+            >
+                <!-- How to Play -->
+                <div
+                    class="bg-[#FFFFFF07] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
+                >
+                    <h2 class="font-neue text-xs text-cyan-glow mb-1">
+                        HOW TO PLAY
+                    </h2>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        🔤 <strong class="text-white">Guess</strong> the hidden
+                        word one letter at a time.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        ❌
+                        <strong class="text-white">6 wrong guesses</strong> and
+                        it's game over.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        💡 Use the
+                        <strong class="text-white">category hint</strong> to
+                        narrow it down.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        ⌨️ Click the letters
+                        <strong class="text-white">or type</strong> on your
+                        keyboard.
+                    </p>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        🏆 Win rounds to climb the
+                        <strong class="text-white">leaderboard</strong>!
+                    </p>
+                </div>
+
+                <!-- Username input -->
+                <div class="flex gap-2">
+                    <input
+                        type="text"
+                        id="username-input"
+                        placeholder="Your username..."
+                        maxlength="16"
+                        class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-cyan-glow transition placeholder-gray-600"
+                        aria-label="Username"
+                    />
+                    <button
+                        id="start-btn"
+                        class="bg-yellow-brand text-black px-4 py-2 rounded-xl font-semibold text-sm hover:brightness-110 transition"
+                    >
+                        Start!
+                    </button>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════
+                 SCREEN 2: Game Board (hidden until username set)
+            ══════════════════════════════════════ -->
+            <section
+                id="game-screen"
+                class="hidden w-full max-w-4xl flex flex-col gap-8"
+                aria-label="Game board"
+            >
+                <!-- Welcome bar -->
+                <div class="flex items-center justify-between">
+                    <p
+                        id="welcome-text"
+                        class="font-press text-[9px] text-purple-glow"
+                    ></p>
+                    <button
+                        id="change-user-btn"
+                        class="text-xs text-white/40 hover:text-white transition underline"
+                    >
+                        change user
+                    </button>
+                </div>
+
+                <!-- Board: gallows left, word+keyboard right -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Left column -->
+                    <div class="flex flex-col items-center gap-4">
+                        <!-- SVG Gallows -->
+                        <div
+                            class="rounded-xl border border-cyan-glow/20 bg-white/[.03] p-4"
+                            style="width: 220px; height: 240px"
+                        >
+                            <svg
+                                id="hangman-svg"
+                                viewBox="0 0 200 220"
+                                width="200"
+                                height="220"
+                                aria-label="Hangman drawing"
+                                role="img"
+                            >
+                                <!-- gallows structure -->
+                                <line
+                                    x1="20"
+                                    y1="210"
+                                    x2="180"
+                                    y2="210"
+                                    stroke="rgba(0,229,255,.35)"
+                                    stroke-width="3"
+                                />
+                                <line
+                                    x1="60"
+                                    y1="210"
+                                    x2="60"
+                                    y2="20"
+                                    stroke="rgba(0,229,255,.35)"
+                                    stroke-width="3"
+                                />
+                                <line
+                                    x1="60"
+                                    y1="20"
+                                    x2="140"
+                                    y2="20"
+                                    stroke="rgba(0,229,255,.35)"
+                                    stroke-width="3"
+                                />
+                                <line
+                                    x1="140"
+                                    y1="20"
+                                    x2="140"
+                                    y2="45"
+                                    stroke="rgba(0,229,255,.35)"
+                                    stroke-width="2"
+                                />
+                                <!-- body parts, revealed per wrong guess -->
+                                <circle
+                                    id="hm-head"
+                                    cx="140"
+                                    cy="57"
+                                    r="12"
+                                    stroke="#f4d35e"
+                                    stroke-width="2.5"
+                                    fill="none"
+                                    style="display: none"
+                                />
+                                <line
+                                    id="hm-body"
+                                    x1="140"
+                                    y1="69"
+                                    x2="140"
+                                    y2="120"
+                                    stroke="#f4d35e"
+                                    stroke-width="2.5"
+                                    style="display: none"
+                                />
+                                <line
+                                    id="hm-larm"
+                                    x1="140"
+                                    y1="80"
+                                    x2="115"
+                                    y2="100"
+                                    stroke="#f4d35e"
+                                    stroke-width="2.5"
+                                    style="display: none"
+                                />
+                                <line
+                                    id="hm-rarm"
+                                    x1="140"
+                                    y1="80"
+                                    x2="165"
+                                    y2="100"
+                                    stroke="#f4d35e"
+                                    stroke-width="2.5"
+                                    style="display: none"
+                                />
+                                <line
+                                    id="hm-lleg"
+                                    x1="140"
+                                    y1="120"
+                                    x2="115"
+                                    y2="150"
+                                    stroke="#f4d35e"
+                                    stroke-width="2.5"
+                                    style="display: none"
+                                />
+                                <line
+                                    id="hm-rleg"
+                                    x1="140"
+                                    y1="120"
+                                    x2="165"
+                                    y2="150"
+                                    stroke="#f4d35e"
+                                    stroke-width="2.5"
+                                    style="display: none"
+                                />
+                            </svg>
+                        </div>
+
+                        <!-- Lives pips -->
+                        <div class="flex flex-col items-center gap-2">
+                            <p class="category-label">lives</p>
+                            <div
+                                id="lives-pips"
+                                class="flex gap-2"
+                                aria-live="polite"
+                                aria-label="Lives remaining"
+                            ></div>
+                        </div>
+
+                        <!-- Category hint -->
+                        <div
+                            class="hint-box px-4 py-2 flex flex-col items-center gap-1"
+                        >
+                            <p class="category-label">category</p>
+                            <p
+                                id="category-text"
+                                class="font-inter text-sm font-semibold text-purple-glow"
+                            ></p>
+                        </div>
+
+                        <!-- Score counters -->
+                        <div
+                            class="grid grid-cols-2 gap-3 w-full max-w-[220px]"
+                        >
+                            <div
+                                class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                            >
+                                <div class="text-xs text-gray-500 mb-1">
+                                    WINS
+                                </div>
+                                <div
+                                    id="score-wins"
+                                    class="font-neue text-xl text-cyan-glow"
+                                >
+                                    0
+                                </div>
+                            </div>
+                            <div
+                                class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                            >
+                                <div class="text-xs text-gray-500 mb-1">
+                                    LOSSES
+                                </div>
+                                <div
+                                    id="score-losses"
+                                    class="font-neue text-xl text-yellow-brand"
+                                >
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column -->
+                    <div class="flex flex-col gap-8 justify-center">
+                        <!-- Word tiles -->
+                        <section aria-label="Word to guess">
+                            <div
+                                id="word-display"
+                                class="flex flex-wrap gap-3 justify-center"
+                            ></div>
+                        </section>
+
+                        <!-- Wrong guess counter -->
+                        <p class="font-press text-xs text-center">
+                            <span class="text-white/40">WRONG: </span>
+                            <span id="wrong-count" class="text-red-400">0</span>
+                            <span class="text-white/40"> / 6</span>
+                        </p>
+
+                        <!-- On-screen keyboard -->
+                        <section aria-label="Letter keyboard">
+                            <div
+                                id="keyboard"
+                                class="flex flex-wrap gap-2 justify-center"
+                            ></div>
+                        </section>
+
+                        <!-- Leaderboard -->
+                        <div
+                            class="bg-[#121212] border border-gray-700 rounded-xl p-4"
+                        >
+                            <h2
+                                class="font-neue text-xs text-yellow-brand mb-3"
+                            >
+                                🏆 LEADERBOARD
+                            </h2>
+                            <ol
+                                id="leaderboard-list"
+                                class="flex flex-col gap-2 text-sm"
+                                aria-label="Leaderboard"
+                            ></ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer
+            id="site-footer"
+            class="bg-black text-white text-center py-4 mt-12"
+        ></footer>
+
+        <!-- Shared scripts: header, footer, nav, leaderboard must load BEFORE hangman.js -->
+        <script src="../js/header.js"></script>
+        <script src="../js/footer.js"></script>
+        <script src="../js/nav.js"></script>
+        <script src="../js/leaderboard.js"></script>
+
+        <!-- Hangman game — uses saveScore() and renderLeaderboard() from leaderboard.js -->
+        <script src="../dist/hangman.js"></script>
+    </body>
+</html>

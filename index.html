@@ -4,131 +4,35 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home - RevouFun</title>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="css/output.css">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&display=swap"
             rel="stylesheet"
         />
-
-        <style type="text/tailwindcss">
-            @theme {
-                --yellow-brand: #f4d35e;
-                --gaming-black: #121212;
-                --neon-blue: #00d1ff;
-                --purple-glow: #7b61ff;
-                /*Font*/
-                --font-family-orbitron: "Orbitron", sans-serif;
-                --font-family-poppins: "Poppins", sans-serif;
-                --font-family-press-start: "Press Start 2P", cursive;
-            }
-        </style>
     </head>
-    <body class="bg-(--gaming-black) text-white font-[poppins]">
-        <header class="bg-black text-white">
-            <div class="flex items-center justify-between px-4 py-4 md:px-8">
-                <div
-                    class="text-xl font-bold text-(--yellow-brand) font-[orbitron]"
-                >
-                    Revou Fun
-                </div>
-
-                <!-- Mobile menu toggle button -->
-                <button
-                    id="mobile-toggle"
-                    aria-label="toggle navigation"
-                    class="md:hidden flex flex-col gap-1.5 gap-2"
-                >
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                </button>
-
-                <nav class="hidden md:flex gap-6 items-center">
-                    <a
-                        href="#Hero"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Home</a
-                    >
-                    <a
-                        href="#games"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Games</a
-                    >
-                    <a
-                        href="#about"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >About Us</a
-                    >
-                    <a
-                        href="#feature"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Features</a
-                    >
-                    <a href="#news" class="hover:text-(--yellow-brand)">News</a>
-                    <button
-                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl hover:brightness-110 transition font-medium"
-                    >
-                        Play Now!
-                    </button>
-                </nav>
-            </div>
-            <!-- Desktop navbar -->
-            <div
-                id="nav-mobile"
-                class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
-                style="display: none;"
-            >
-                <a
-                    href="#Hero"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Home</a
-                >
-                <a
-                    href="#games"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Games</a
-                >
-                <a
-                    href="#about"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >About Us</a
-                >
-                <a
-                    href="#feature"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Features</a
-                >
-                <a
-                    href="#news"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >News</a
-                >
-                <button
-                    class="mt-4 bg-(--yellow-brand) text-black py-2 rounded-xl font-medium hover:brightness-110 transition"
-                >
-                    Play Now!
-                </button>
-            </div>
-        </header>
+    <body class="bg-(--deep-dark-blue) text-white font-inter">
+        <header id="site-header" class="bg-black text-white"></header>
         <main>
             <section id="Hero">
                 <div
                     class="flex flex-col items-center text-center gap-6 mt-12 mx-auto px-4 max-w-3xl"
                 >
+                    <p class="font-press text-(--cyan)">// level up your fun //</p>
                     <h1
-                        class="text-(--yellow-brand) font-[orbitron] text-4xl md:text-5xl font-bold"
+                        class="text-white font-neue text-4xl md:text-5xl font-bold"
                     >
-                        Welcome to Revou Fun!
+                        Welcome to <br>
+                        <span class="text-(--purple-glow)">Revou Fun!</span>
                     </h1>
-                    <p class="text-gray-400 text-lg">
+                    <p class="text-gray-400 text-sm">
                         Your ultimate destination for fun and engaging games.
                         Explore our collection of exciting games and start
                         playing today!
                     </p>
                     <button
-                        class="bg-(--yellow-brand) text-black px-6 py-3 rounded-xl hover:brightness-110 transition font-medium"
+                        class="bg-(--purple-glow) font-neue text-white text-black px-6 py-3 rounded-xl hover:brightness-110 transition font-medium"
                     >
                         Play Now!
                     </button>
@@ -137,7 +41,7 @@
             <section id="about" class="mt-12 px-4">
                 <div class="max-w-5xl mx-auto">
                     <h2
-                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                        class="text-(--purple-glow) font-neue text-2xl font-bold mb-4"
                     >
                         About Us
                     </h2>
@@ -155,10 +59,10 @@
                         </p>
                         <div class="grid grid-cols-2 gap-4 md:w-1/2">
                             <div
-                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                                class="bg-[#7B61FF12] border border-gray-700 rounded-xl p-4 text-center"
                             >
                                 <div
-                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                    class="text-(--yellow-brand) font-neue text-3xl font-bold"
                                 >
                                     3+
                                 </div>
@@ -167,10 +71,10 @@
                                 </div>
                             </div>
                             <div
-                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                                class="bg-[#7B61FF12] border border-gray-700 rounded-xl p-4 text-center"
                             >
                                 <div
-                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                    class="text-(--yellow-brand) font-neue text-3xl font-bold"
                                 >
                                     90K+
                                 </div>
@@ -179,10 +83,10 @@
                                 </div>
                             </div>
                             <div
-                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                                class="bg-[#7B61FF12] border border-gray-700 rounded-xl p-4 text-center"
                             >
                                 <div
-                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                    class="text-(--yellow-brand) font-neue text-3xl font-bold"
                                 >
                                     30+
                                 </div>
@@ -191,10 +95,10 @@
                                 </div>
                             </div>
                             <div
-                                class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 text-center"
+                                class="bg-[#7B61FF12] border border-gray-700 rounded-xl p-4 text-center"
                             >
                                 <div
-                                    class="text-(--yellow-brand) font-[orbitron] text-3xl font-bold"
+                                    class="text-(--yellow-brand) font-neue text-3xl font-bold"
                                 >
                                     99%
                                 </div>
@@ -209,7 +113,7 @@
             <section id="games" class="mt-12 mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
                     <h2
-                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                        class="text-(--purple-glow) font-neue text-2xl font-bold mb-4"
                     >
                         Our Games
                     </h2>
@@ -218,7 +122,7 @@
                         class="flex justify-center items-stretch gap-5 flex-wrap"
                     >
                         <article
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                            class="bg-[#FFFFFF08] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
                         >
                             <figure>
                                 <img
@@ -231,7 +135,7 @@
                                 </figcaption>
                             </figure>
                             <h3
-                                class="text-white font-[orbitron] text-base font-semibold mt-3 mb-1"
+                                class="text-white font-neue text-base font-semibold mt-3 mb-1"
                             >
                                 Tic-Tac-Toe
                             </h3>
@@ -240,7 +144,7 @@
                             </p>
                             <div class="flex items-center justify-between mt-2">
                                 <p
-                                    class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                    class="text-xs font-[Inter] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
                                 >
                                     Genre: Strategy
                                 </p>
@@ -252,7 +156,7 @@
                             </div>
                         </article>
                         <article
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                            class="bg-[#FFFFFF08] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
                         >
                             <figure>
                                 <img
@@ -265,7 +169,7 @@
                                 </figcaption>
                             </figure>
                             <h3
-                                class="text-white font-[orbitron] text-base font-semibold mt-3 mb-1"
+                                class="text-white font-neue text-base font-semibold mt-3 mb-1"
                             >
                                 Rock-Paper-Scissors
                             </h3>
@@ -274,7 +178,7 @@
                             </p>
                             <div class="flex items-center justify-between mt-2">
                                 <p
-                                    class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                    class="text-xs font-[Inter] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
                                 >
                                     Genre: Strategy
                                 </p>
@@ -286,7 +190,7 @@
                             </div>
                         </article>
                         <article
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                            class="bg-[#FFFFFF08] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
                         >
                             <figure>
                                 <img
@@ -299,7 +203,7 @@
                                 </figcaption>
                             </figure>
                             <h3
-                                class="text-white font-[orbitron] text-base font-semibold mt-3 mb-1"
+                                class="text-white font-neue text-base font-semibold mt-3 mb-1"
                             >
                                 Number Guessing Game
                             </h3>
@@ -308,12 +212,81 @@
                             </p>
                             <div class="flex items-center justify-between mt-2">
                                 <p
-                                    class="text-xs font-[poppins] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                    class="text-xs font-[Inter] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
                                 >
                                     Genre: Puzzle
                                 </p>
                                 <a
                                     href="pages/guessingNumber.html"
+                                    class="text-xs text-(--neon-blue) hover:underline transition"
+                                    >Play Now!</a
+                                >
+                            </div>
+                        </article>
+                        <article
+                            class="bg-[#FFFFFF08] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                        >
+                            <figure>
+                                <img
+                                    src="assets/hangman.png"
+                                    alt="Preview Hangman"
+                                    class="w-full h-auto rounded-lg"
+                                />
+                                <figcaption class="text-sm text-gray-400 mt-1">
+                                    By Satria
+                                </figcaption>
+                            </figure>
+                            <h3
+                                class="text-white font-neue text-base font-semibold mt-3 mb-1"
+                            >
+                                Hangman
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-2">
+                                A word guessing game with a fun twist.
+                            </p>
+                            <div class="flex items-center justify-between mt-2">
+                                <p
+                                    class="text-xs font-[Inter] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                >
+                                    Genre: Word Game
+                                </p>
+                                <a
+                                    href="pages/hangman.html"
+                                    class="text-xs text-(--neon-blue) hover:underline transition"
+                                    >Play Now!</a
+                                >
+                            </div>
+                        </article>
+                        <article
+                            class="bg-[#FFFFFF08] border border-gray-700 rounded-xl p-4 w-full sm:flex-1 sm:min-w-[280px] sm:max-w-[400px] transition-transform duration-300 hover:-translate-y-4"
+                        >
+                            <figure>
+                                <img
+                                    src="assets/pacman.png"
+                                    alt="Preview Pac-man"
+                                    class="w-full h-auto rounded-lg"
+                                />
+                                <figcaption class="text-sm text-gray-400 mt-1">
+                                    By Satria
+                                </figcaption>
+                            </figure>
+                            <h3
+                                class="text-white font-neue text-base font-semibold mt-3 mb-1"
+                            >
+                                Pac-man
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-2">
+                                A classic arcade game where you eat pellets and
+                                avoid ghosts.
+                            </p>
+                            <div class="flex items-center justify-between mt-2">
+                                <p
+                                    class="text-xs font-[Inter] bg-[#7b61ff22] text-(--purple-glow) border border-[#7b61ff55] px-2 py-0.5 rounded inline-block"
+                                >
+                                    Genre: Arcade
+                                </p>
+                                <a
+                                    href="pages/pacman.html"
                                     class="text-xs text-(--neon-blue) hover:underline transition"
                                     >Play Now!</a
                                 >
@@ -325,20 +298,20 @@
             <section id="feature" class="mt-12 px-4">
                 <div class="max-w-5xl mx-auto">
                     <h2
-                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                        class="text-(--purple-glow) font-neue text-2xl font-bold mb-4"
                     >
                         Features
                     </h2>
                     <hr class="border-gray-700 mb-6" />
                     <div
-                        class="grid grid cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
                     >
                         <div
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl p-5"
                         >
                             <div class="text-2xl mb-3">👾</div>
                             <h3
-                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                                class="text-white font-neue text-sm font-semibold mb-2"
                             >
                                 Cross-Platform
                             </h3>
@@ -348,11 +321,11 @@
                             </p>
                         </div>
                         <div
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl p-5"
                         >
                             <div class="text-2xl mb-3">👥</div>
                             <h3
-                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                                class="text-white font-neue text-sm font-semibold mb-2"
                             >
                                 Multiplayer Support
                             </h3>
@@ -362,11 +335,11 @@
                             </p>
                         </div>
                         <div
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl p-5"
                         >
                             <div class="text-2xl mb-3">🔁</div>
                             <h3
-                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                                class="text-white font-neue text-sm font-semibold mb-2"
                             >
                                 Regular Updates
                             </h3>
@@ -376,11 +349,11 @@
                             </p>
                         </div>
                         <div
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl p-5"
                         >
                             <div class="text-2xl mb-3">✨</div>
                             <h3
-                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                                class="text-white font-neue text-sm font-semibold mb-2"
                             >
                                 Clean UI
                             </h3>
@@ -390,11 +363,11 @@
                             </p>
                         </div>
                         <div
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl p-5"
                         >
                             <div class="text-2xl mb-3">🔒</div>
                             <h3
-                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                                class="text-white font-neue text-sm font-semibold mb-2"
                             >
                                 Secure & Reliable
                             </h3>
@@ -404,11 +377,11 @@
                             </p>
                         </div>
                         <div
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl p-5"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl p-5"
                         >
                             <div class="text-2xl mb-3">🏆</div>
                             <h3
-                                class="text-white font-[orbitron] text-sm font-semibold mb-2"
+                                class="text-white font-neue text-sm font-semibold mb-2"
                             >
                                 Leaderboards
                             </h3>
@@ -423,7 +396,7 @@
             <section id="news" class="mt-12 px-4">
                 <div class="max-w-5xl mx-auto">
                     <h2
-                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                        class="text-(--purple-glow) font-neue text-2xl font-bold mb-4"
                     >
                         News
                     </h2>
@@ -432,10 +405,10 @@
                         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
                     >
                         <article
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl overflow-hidden"
                         >
                             <div
-                                class="bg-[#2a2a2a] h-36 flex items-center justify-center text-4xl"
+                                class="bg-[#00E5FF0D] h-36 flex items-center justify-center text-4xl"
                             >
                                 🎲
                             </div>
@@ -445,7 +418,7 @@
                                     >Update</span
                                 >
                                 <h3
-                                    class="text-white font-[orbitron] text-sm font-semibold mt-2 mb-1"
+                                    class="text-white font-neue text-sm font-semibold mt-2 mb-1"
                                 >
                                     New Game Mode Incoming
                                 </h3>
@@ -462,10 +435,10 @@
                             </div>
                         </article>
                         <article
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl overflow-hidden"
                         >
                             <div
-                                class="bg-[#2a2a2a] h-36 flex items-center justify-center text-4xl"
+                                class="bg-[#7861FF0D] h-36 flex items-center justify-center text-4xl"
                             >
                                 🏆
                             </div>
@@ -475,7 +448,7 @@
                                     >Event</span
                                 >
                                 <h3
-                                    class="text-white font-[orbitron] text-sm font-semibold mt-2 mb-1"
+                                    class="text-white font-neue text-sm font-semibold mt-2 mb-1"
                                 >
                                     First Community Tournament
                                 </h3>
@@ -491,10 +464,10 @@
                             </div>
                         </article>
                         <article
-                            class="bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                            class="bg-[#FFFFFF05] border border-gray-700 rounded-xl overflow-hidden"
                         >
                             <div
-                                class="bg-[#2a2a2a] h-36 flex items-center justify-center text-4xl"
+                                class="bg-[#F4D35E0D] h-36 flex items-center justify-center text-4xl"
                             >
                                 🚀
                             </div>
@@ -504,7 +477,7 @@
                                     >Launch</span
                                 >
                                 <h3
-                                    class="text-white font-[orbitron] text-sm font-semibold mt-2 mb-1"
+                                    class="text-white font-neue text-sm font-semibold mt-2 mb-1"
                                 >
                                     Revou Fun is Live!
                                 </h3>
@@ -525,11 +498,11 @@
             </section>
             <section id="cta" class="mt-12 px-4">
                 <div
-                    class="max-w-3xl mx-auto text-center bg-[#1E1E1E] border border-gray-700 rounded-2xl p-10"
+                    class="max-w-3xl mx-auto text-center bg-[#7B61FF0F] border border-gray-700 rounded-2xl p-10"
                 >
-                    <div></div>
+                    <p class="font-['Press_Start_2P'] text-(--cyan) mb-4">// ready player one? //</p>
                     <h2
-                        class="text-(--yellow-brand) font-[orbitron] text-2xl font-bold mb-4"
+                        class="text-(--yellow-brand) font-neue text-2xl font-bold mb-4"
                     >
                         Ready to Play?
                     </h2>
@@ -540,7 +513,7 @@
                     </p>
                     <div class="flex gap-3 justify-center flex-wrap">
                         <button
-                            class="bg-(--yellow-brand) text-black px-6 py-3 rounded-xl hover:brightness-110 transition font-medium"
+                            class="bg-(--purple-glow) font-neue text-white px-6 py-3 rounded-xl hover:brightness-110 transition font-medium"
                         >
                             Play Now!
                         </button>
@@ -553,11 +526,9 @@
                 </div>
             </section>
         </main>
-        <footer class="bg-black text-white text-center py-4 mt-12">
-            <div class="text-gray-400 text-sm">
-                &copy; 2026 Satria Pamungkas. All Right Reserved.
-            </div>
-        </footer>
+        <footer id="site-footer" class="bg-black text-white text-center py-4 mt-12"></footer>
+        <script src="js/header.js"></script>
+        <script src="js/footer.js"></script>
         <script src="js/nav.js"></script>
     </body>
 </html>

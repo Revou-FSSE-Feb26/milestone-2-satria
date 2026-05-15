@@ -37,7 +37,7 @@ function renderLeaderboard(storageKey, listElement){
     const medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣"];
 
     if(leaderboard.length === 0){
-        leaderboardList.innerHTML = `<li class="text-gray-600 text-xs text-center">No scores yet. Be the First!</li>`;
+        listElement.innerHTML = `<li class="text-gray-600 text-xs text-center">No scores yet. Be the First!</li>`;
         return
     }
 
@@ -45,7 +45,7 @@ function renderLeaderboard(storageKey, listElement){
     listElement.innerHTML = leaderboard.map((entry,index) => `
         <li class="flex items-center justify-between bg-[#1E1E1E] px-3 py-1.4 rounded-lg">
             <span class="text-gray-300">${medals[index]} ${entry.name}</span>
-            <span class="font-[orbitron] text-(--yellow-brand) text-sm font-bold">${entry.score} pts</span>
+            <span class="font-neue text-(--yellow-brand) text-sm font-bold">${entry.score} pts</span>
         </li>
     `).join("");
 }

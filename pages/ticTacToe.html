@@ -3,30 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="../css/output.css">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&display=swap"
             rel="stylesheet"
         />
-        <style type="text/tailwindcss">
-            @theme {
-                --yellow-brand: #f4d35e;
-                --gaming-black: #121212;
-                --neon-blue: #00d1ff;
-                --purple-glow: #7b61ff;
-                /*Font*/
-                --font-family-orbitron: "Orbitron", sans-serif;
-                --font-family-poppins: "Poppins", sans-serif;
-                --font-family-press-start: "Press Start 2P", cursive;
-            }
-        </style>
+        <title>Tic Tac Toe</title>
         <style>
             .container {
                 width: 300px;
                 margin: 0 auto;
             }
+
             .box {
                 width: 100px;
                 height: 100px;
@@ -34,15 +24,21 @@
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
-                font-size: 2rem;
-                font-weight: bold;
-                border: 1px solid #374141;
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 2.5rem;
+                letter-spacing: 0.05em;
+                border: 1px solid rgba(123, 97, 255, 0.25);
                 color: white;
-                transition: backgorund-color 0.2s;
+                transition:
+                    background-color 0.2s,
+                    box-shadow 0.2s;
             }
             .box:hover {
-                background-color: #2a2a2a;
+                background-color: rgba(123, 97, 255, 0.08);
+                box-shadow: inset 0 0 12px rgba(123, 97, 255, 0.1);
             }
+
+            /* Remove outer borders */
             .box:nth-child(1),
             .box:nth-child(2),
             .box:nth-child(3) {
@@ -63,110 +59,43 @@
             .box:nth-child(9) {
                 border-right: none;
             }
+
+            /* X and O colors */
+            .box[data-symbol="X"] {
+                color: #7b61ff;
+                text-shadow: 0 0 14px rgba(123, 97, 255, 0.8);
+            }
+            .box[data-symbol="O"] {
+                color: #00e5ff;
+                text-shadow: 0 0 14px rgba(0, 229, 255, 0.8);
+            }
+
+            /* ── Scrollbar ── */
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #0b0f1a;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #7b61ff;
+                border-radius: 3px;
+            }
         </style>
-        <title>Tic Tac Toe</title>
     </head>
-    <body class="bg-(--gaming-black) text-white min-h-screen flex flex-col">
-        <header class="bg-black text-white">
-            <div class="flex items-center justify-between px-4 py-4 md:px-8">
-                <div
-                    class="text-xl font-bold text-(--yellow-brand) font-[orbitron]"
-                >
-                    Revou Fun
-                </div>
-
-                <!-- Mobile menu toggle button -->
-                <button
-                    id="mobile-toggle"
-                    aria-label="toggle navigation"
-                    class="md:hidden flex flex-col gap-1.5 gap-2"
-                >
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                </button>
-
-                <nav class="hidden md:flex gap-6 items-center">
-                    <a
-                        href="../index.html#hero"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Home</a
-                    >
-                    <a
-                        href="../index.html#games"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Games</a
-                    >
-                    <a
-                        href="../index.html#about"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >About Us</a
-                    >
-                    <a
-                        href="../index.html#feature"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Features</a
-                    >
-                    <a
-                        href="../index.html#news"
-                        class="hover:text-(--yellow-brand)"
-                        >News</a
-                    >
-                    <button
-                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl hover:brightness-110 transition font-medium"
-                    >
-                        Play Now!
-                    </button>
-                </nav>
-            </div>
-            <!-- Desktop navbar -->
-            <div
-                id="nav-mobile"
-                class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
-                style="display: none;"
-            >
-                <a
-                    href="../index.html#hero"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Home</a
-                >
-                <a
-                    href="../index.html#games"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Games</a
-                >
-                <a
-                    href="../index.html#about"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >About Us</a
-                >
-                <a
-                    href="../index.html#feature"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Features</a
-                >
-                <a
-                    href="../index.html#news"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >News</a
-                >
-                <button
-                    class="mt-4 bg-(--yellow-brand) text-black py-2 rounded-xl font-medium hover:brightness-110 transition"
-                >
-                    Play Now!
-                </button>
-            </div>
-        </header>
+    <body class="bg-(--deep-dark-blue) text-white min-h-screen flex flex-col font-inter">
+        <header id="site-header" class="bg-black text-white"></header>
         <main
             class="flex-1 flex flex-col items-center justify-center px-4 py-12"
         >
             <div
                 id="username"
-                class="bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+                class="bg-[#FFFFFF05] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
             >
                 <div class="text-center">
+                    <p class="font-press text-(--cyan) text-[8px]">// Tic-Tac-Toe //</p>
                     <h1
-                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                        class="font-neue text-xl font-bold text-(--purple-glow) text-[1.75rem]"
                     >
                         Tic-Tac-Toe
                     </h1>
@@ -174,16 +103,27 @@
                         Get 3 straight To win!
                     </p>
                     <p class="text-gray-400 text-sm mt-1">
-                        Enter Your Username
+                        Enter Your Username to Start
                     </p>
+                    <div class="bg-[#FFFFFF07] border border-gray-700 rounded-xl p-4 flex items-center justify-between">
+                        <span class="text-xs text-gray-400">Game Mode</span>
+                        <div class="flex items-center gap-3">
+                            <span id="aiToggleLabel" class="text-xs tet-gray-300">vs Player</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="aiToggle" class="sr-only peer">
+                                <div class="w-10 h-5 bg-gray-700 rounded-full peer peer-checked:bg-(--purple-glow) transition-all"></div>
+                                <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-5"></div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div
-                    class="bg-[#121212] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
+                    class="bg-[#FFFFFF07] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
                 >
-                    <h2 class="font-[orbitron] text-xs text-(--neon-blue) mb-1">
+                    <h2 class="font-neue text-xs text-(--cyan) mb-1">
                         HOW TO PLAY
                     </h2>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p class="text-gray-400 color-[#FFFFFF80] text-xs leading-relaxed">
                         Two Players take turns
                         <strong class="text-white">X</strong> goes first.
                     </p>
@@ -221,11 +161,12 @@
             <!-- Games -->
             <div
                 id="gameScreen"
-                class="hidden bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+                class="hidden bg-[#FFFFFF05] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
             >
                 <div class="text-center">
+                    <p class="font-press text-(--cyan) text-[8px]">// round in progress //</p>
                     <h1
-                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                        class="font-neue text-xl font-bold text-(--purple-glow)"
                     >
                         TIC-TAC-TOE
                     </h1>
@@ -234,7 +175,7 @@
 
                 <!-- board -->
                 <div
-                    class="container grid grid-cols-3 bg-[#1E1E1E] border border-gray-700 rounded-xl overflow-hidden"
+                    class="container grid grid-cols-3 bg-[#1E1E1E] border border-gray-700 rounded-xl w-[300px] h-[300px] mx-auto overflow-hidden"
                 >
                     <div data-index="0" class="box"></div>
                     <div data-index="1" class="box"></div>
@@ -255,28 +196,37 @@
 
                 <div class="grid grid-cols-2 gap-3 w-full">
                     <div
-                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                        class="bg-[#7B61FF0F] border border-gray-700 rounded-xl p-3 text-center"
                     >
                         <div class="text-xs text-gray-500 mb-1">Your Wins</div>
                         <div
                             id="winCount"
-                            class="font-[orbitron] text-xl font-bold text-(--neon-blue)"
+                            class="font-neue text-xl font-bold text-(--cyan)"
                         >
                             0
                         </div>
                     </div>
                     <div
-                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
+                        class="bg-[#7B61FF0F] border border-gray-700 rounded-xl p-3 text-center"
                     >
                         <div class="text-xs text-gray-500 mb-1">Draw</div>
                         <div
                             id="drawCount"
-                            class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                            class="font-neue text-xl font-bold text-(--yellow-brand)"
                         >
                             0
                         </div>
                     </div>
                 </div>
+
+                <div class="bg-[#FFFFFF07] border border-gray-700 rounded-xl p-3 flex items-center justify-between">
+                    <span class="text-xs">All time wins</span>
+                    <span id="allTimeWins" class="font-neue text-sm text-(--yellow-brand)">0</span>
+                </div>
+
+                <p class="text-xs text-center">
+                    Session resets on restart · Leaderboard tracks all-time
+                </p>
 
                 <button
                     class="restartBtn bg-(--yellow-brand) text-black px-6 py-2 rounded-xl font-medium text-sm hover:brightness-110 active:scale-95 transition-all duration-150 cursor-pointer"
@@ -286,7 +236,7 @@
 
                 <div class="bg-[#121212] border border-gray-700 rounded-xl p-4">
                     <h2
-                        class="font-[orbitron] text-xs text-(--yellow-brand) mb-3"
+                        class="font-neue text-xs text-(--yellow-brand) mb-3"
                     >
                         LEADERBOARD
                     </h2>
@@ -297,11 +247,10 @@
                 </div>
             </div>
         </main>
-        <footer class="bg-black text-white text-center py-4 mt-12">
-            <div class="text-gray-400 text-sm">
-                &copy; 2026 Satria Pamungkas. All Right Reserved.
-            </div>
+        <footer id="site-footer" class="bg-black text-white text-center py-4 mt-12">
         </footer>
+        <script src="../js/header.js"></script>
+        <script src="../js/footer.js"></script>
         <script src="../js/nav.js"></script>
         <script src="../js/username.js"></script>
         <script src="../js/leaderboard.js"></script>
