@@ -56,23 +56,28 @@ function playGuessGame(playerGuess){
             toggleGameInputs(true);
             saveScore(playerName, score, "guessingLeaderboard");
             renderLeaderboard("guessingLeaderboard", leaderboardList);
+
+            //Regenerate a new number and reset attempt for next round
+            setTimeout(() => {
+                numberToGuess = Math.floor(Math.random() *100) + 1;
+                attempt = 5;
+                attemptCount.textContent = attempt;
+                guessInput.value = "";
+                resultDisplay.textContent = "Great Works! Guess the next number";
+                guessInput.disabled = false;
+                guessButton.disabled = false;
+                guessButton.textContent = "Submit";
+                guessButton.style.opacity = "1";
+            }, 1500); //short delay so player sees the congrats message
             break;
-        case playerGuess < numberToGuess:
+        case playerGuess !== numberToGuess:
             attempt--;
             attemptCount.textContent = attempt;
             guessInput.value = "";
+            const direction = playerGuess < numberToGuess ? "TOO LOW" : "TOO HIGH";
             result = attempt === 0 
                 ? `GAME OVER! THE NUMBER WAS  (#${numberToGuess})` 
-                : `TOO LOW! TRY AGAIN. (Guess #${guessHistory.length})`;
-            if(attempt === 0) toggleGameInputs(true);
-            break;
-        case playerGuess > numberToGuess:
-            attempt--;
-            attemptCount.textContent = attempt;
-            guessInput.value = "";
-            result = attempt === 0 
-                ? `GAME OVER! THE NUMBER WAS  (#${numberToGuess})` 
-                : `TOO HIGH! TRY AGAIN. (Guess #${guessHistory.length})`;
+                : `${direction}! TRY AGAIN. (Guess #${guessHistory.length})`;
             if(attempt === 0) toggleGameInputs(true);
             break;
     }

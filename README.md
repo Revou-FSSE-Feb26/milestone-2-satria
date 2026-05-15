@@ -1,14 +1,14 @@
 # RevouFun
 
-> A collection of classic mini-games built with vanilla JavaScript, styled with Tailwind CSS.
+> A collection of classic mini-games built with vanilla JavaScript and TypeScript, styled with Tailwind CSS.
 
 ---
 
 ## Overview
 
-RevouFun is a web-based gaming platform featuring three classic games — Tic-Tac-Toe, Rock Paper Scissors, and Number Guessing. Each game includes a nickname system, live leaderboard powered by localStorage, and a unified dark gaming aesthetic built with a custom design system.
+RevouFun is a web-based gaming platform featuring three classic games — Tic-Tac-Toe, Rock Paper Scissors, Number Guessing, Hangman, and Pacman. Each game includes a nickname system, live leaderboard powered by localStorage, and a unified dark gaming aesthetic built with a custom design system.
 
-This project was built as part of a front-end development assignment focusing on JavaScript fundamentals, DOM manipulation, and responsive UI design.
+This project was built as part of a front-end development assignment focusing on JavaScript/TypeScript fundamentals, DOM manipulation, and responsive UI design.
 
 ---
 
@@ -23,11 +23,17 @@ Classic hand game against the computer. The computer picks randomly — outsmart
 ### Tic-Tac-Toe
 Two-player strategy game on a 3×3 grid. Get 3 in a row horizontally, vertically, or diagonally to win. Winning cells are highlighted and your win count is tracked on the leaderboard.
 
+### Hangman
+Guess the hidden word one letter at a time before the hangman is fully drawn. Each wrong letter brings you closer to the end — how many words can you save?
+
+### Pacman
+Navigate the maze, eat all the pellets, and avoid the ghosts. A browser-based take on the arcade classic built with TypeScript.
+
 ---
 
 ## Features
 
-- **3 fully playable games** with interactive JavaScript gameplay
+- **5 fully playable games** with interactive JavaScript gameplay
 - **Nickname system** — enter your name before playing
 - **Leaderboard** — top 5 scores saved per game using localStorage
 - **Responsive design** — works on desktop and mobile
@@ -44,8 +50,9 @@ Two-player strategy game on a 3×3 grid. Get 3 in a row horizontally, vertically
 |---|---|
 | HTML5 | Page structure and semantic markup |
 | Vanilla JavaScript | Game logic, DOM manipulation, localStorage |
+| Vanilla TypeScript | Game logic |
 | Tailwind CSS v4 (CDN) | Styling and responsive layout |
-| Google Fonts | Orbitron, Poppins, Press Start 2P |
+| Google Fonts | Bebas Neue, Inter, Press Start 2P |
 
 ---
 
@@ -54,10 +61,9 @@ Two-player strategy game on a 3×3 grid. Get 3 in a row horizontally, vertically
 | Token | Value | Usage |
 |---|---|---|
 | Yellow Brand | `#F4D35E` | Primary CTAs, headings, highlights |
-| Gaming Black | `#121212` | Page background |
-| Neon Blue | `#00D1FF` | Accents, Player X color |
+| Deep Dark Blue | `#0B0F1A` | Page background |
+| Cyan | `#00E5FF` | Accents, Player X color |
 | Purple Glow | `#7B61FF` | Accents, Player O color |
-| Card Dark | `#1E1E1E` | Card backgrounds |
 
 ---
 
@@ -69,17 +75,36 @@ revou-fun/
 ├── pages/
 │   ├── guessingNumber.html     # Number Guessing Game page
 │   ├── rockPaperScissors.html  # Rock Paper Scissors page
-│   └── ticTacToe.html          # Tic-Tac-Toe page
+│   ├── ticTacToe.html          # Tic-Tac-Toe page
+│   ├── hangman.html            # Hangman page
+│   └── pacman.html             # Pacman page
 ├── js/
+│   ├── header.js               # Header logic
+│   ├── footer.js               # Footer logic
+│   ├── nav.js                  # Nav logic
+│   ├── leaderboard.js          # Leaderboard logic
+│   ├── username.js             # Username logic
 │   ├── guessingNumber.js       # Number Guessing Game logic
 │   ├── rockPaperScissors.js    # Rock Paper Scissors logic
 │   └── ticTacToe.js            # Tic-Tac-Toe logic
+├── ts/
+│   ├── hangman.ts              # Hangman logic
+│   └── pacman.ts               # Pacman logic
+├── css/
+│   ├── hangman.css              # Hangman style
+│   └── pacman.css               # Pacman style
 ├── assets/
 │   ├─ GuessNumber.png          # image of guess number
 │   ├─ rps.png                  # image of rock paper scissors
 │   ├─ tictactoe.png            # image of tic tac toe
+│   ├─ hangman.png              # image of hangman
+│   ├─ pacman.png               # image of pacman
 │   └── index.png               # image of index
 │
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── tsconfig.json
 └── README.md
 ```
 
@@ -111,6 +136,9 @@ No installation or build step required — this project runs entirely in the bro
 | Number Guessing | ![Number Guessing](assets/GuessNumber.png) |
 | Rock Paper Scissors | ![Rock Paper Scissors](assets/rps.png) |
 | Tic-Tac-Toe | ![Tic-Tac-Toe](assets/tictactoe.png) |
+| Hangman | ![Number Guessing](assets/hangman.png) |
+| Pacman | ![Rock Paper Scissors](assets/pacman.png) |
+
 
 ---
 
@@ -123,6 +151,8 @@ Each game stores its leaderboard separately:
 | Number Guessing | `guessingLeaderboard` |
 | Rock Paper Scissors | `rpsLeaderboard` |
 | Tic-Tac-Toe | `tttLeaderboard` |
+| Hangman | `hangman_leaderboard` |
+| Pacman | `pacman_leaderboard` |
 
 To reset a leaderboard, open DevTools → Console and run:
 ```javascript

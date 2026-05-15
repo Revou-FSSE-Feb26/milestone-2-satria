@@ -1,0 +1,265 @@
+/* ============================================================
+   style.css — All custom styles for the Hangman game
+   Tailwind handles utilities; this file handles custom rules.
+   ============================================================ */
+
+/* ─── Reset ─── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── Base body ─── */
+body {
+    background-color: var(--deep-dark-blue);
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ─── Animated grid background ─── */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─── Purple radial glow blob ─── */
+body::after {
+    content: "";
+    position: fixed;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(
+        circle,
+        rgba(123, 97, 255, 0.18) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─── Scanlines overlay for retro feel ─── */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ─── Ensure main content sits above overlays ─── */
+main {
+    position: relative;
+    z-index: 2;
+}
+
+/* ─── Glowing title text ─── */
+.title-glow {
+    text-shadow:
+        0 0 20px var(--cyan),
+        0 0 60px rgba(0, 229, 255, 0.4);
+}
+
+/* ─── Letter tile (blank underscore / revealed letter) ─── */
+.letter-tile {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.8rem;
+    border-bottom: 3px solid var(--cyan);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--yellow-brand);
+    transition:
+        color 0.3s,
+        text-shadow 0.3s;
+}
+
+.letter-tile.revealed {
+    text-shadow: 0 0 14px var(--yellow-brand);
+}
+
+/* ─── On-screen keyboard key ─── */
+.key-btn {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 0.55rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 2px solid rgba(0, 229, 255, 0.35);
+    border-radius: 6px;
+    background: rgba(0, 229, 255, 0.06);
+    color: #fff;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        transform 0.1s,
+        box-shadow 0.15s;
+    user-select: none;
+}
+
+.key-btn:hover:not(:disabled) {
+    background: rgba(0, 229, 255, 0.18);
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Correct guess: highlight yellow */
+.key-btn.correct {
+    background: rgba(244, 211, 94, 0.15);
+    border-color: var(--yellow-brand);
+    color: var(--yellow-brand);
+    box-shadow: 0 0 10px rgba(244, 211, 94, 0.4);
+    cursor: default;
+}
+
+/* Wrong guess: fade out */
+.key-btn.wrong {
+    background: rgba(255, 60, 60, 0.08);
+    border-color: rgba(255, 60, 60, 0.3);
+    color: rgba(255, 255, 255, 0.25);
+    cursor: default;
+}
+
+.key-btn:disabled {
+    pointer-events: none;
+}
+
+/* ─── Win / Lose overlay ─── */
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 15, 26, 0.88);
+    backdrop-filter: blur(6px);
+    display: none;
+    place-items: center;
+    z-index: 50;
+}
+#overlay.active {
+    display: grid;
+}
+
+.overlay-card {
+    border: 2px solid var(--cyan);
+    box-shadow:
+        0 0 40px rgba(0, 229, 255, 0.25),
+        inset 0 0 60px rgba(0, 0, 0, 0.5);
+    max-width: 30rem;
+    width: 90%;
+}
+
+/* ─── Play Again button ─── */
+.btn-primary {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 0.7rem;
+    background: linear-gradient(135deg, var(--purple-glow), #5a44cc);
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    color: #fff;
+    letter-spacing: 0.06em;
+    transition:
+        box-shadow 0.2s,
+        transform 0.15s;
+}
+.btn-primary:hover {
+    box-shadow: 0 0 24px rgba(123, 97, 255, 0.7);
+    transform: translateY(-2px);
+}
+
+/* ─── Category / hint box ─── */
+.hint-box {
+    border: 1px solid rgba(123, 97, 255, 0.5);
+    background: rgba(123, 97, 255, 0.08);
+    border-radius: 8px;
+}
+
+/* ─── Life pip indicator ─── */
+.life-pip {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    transition:
+        background 0.3s,
+        box-shadow 0.3s;
+}
+.life-pip.lost {
+    background: rgba(255, 60, 60, 0.4);
+    box-shadow: none;
+}
+
+/* ─── Category label text ─── */
+.category-label {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 0.55rem;
+    color: rgba(0, 229, 255, 0.6);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* ─── Shake animation (gallows on wrong guess) ─── */
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-6px);
+    }
+    40% {
+        transform: translateX(6px);
+    }
+    60% {
+        transform: translateX(-4px);
+    }
+    80% {
+        transform: translateX(4px);
+    }
+}
+.shake {
+    animation: shake 0.35s ease;
+}
+
+/* ─── Pop animation (letter reveal / body part reveal) ─── */
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.pop {
+    animation: pop 0.3s ease forwards;
+}

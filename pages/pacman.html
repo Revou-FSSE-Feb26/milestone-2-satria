@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pac-Man — Arcade Edition</title>
+
+        <link rel="stylesheet" href="../css/output.css" />
+        <link rel="stylesheet" href="../css/pacman.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            "yellow-brand": "#f4d35e",
+                            "deep-dark": "#0b0f1a",
+                            "cyan-glow": "#00e5ff",
+                            "purple-glow": "#7b61ff",
+                        },
+                        fontFamily: {
+                            neue: ['"Bebas Neue"', "sans-serif"],
+                            inter: ['"Inter"', "sans-serif"],
+                            press: ['"Press Start 2P"', "system-ui"],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+
+    <body class="bg-deep-dark text-white min-h-screen flex flex-col font-inter">
+        <header id="site-header" class="bg-black text-white"></header>
+        <div class="scanlines" aria-hidden="true"></div>
+
+        <main class="flex-1 flex flex-col items-center px-4 py-8 gap-6">
+            <!-- Title -->
+            <header class="flex flex-col items-center gap-1">
+                <p class="font-press text-cyan-glow text-[8px]">
+                    // pac · man //
+                </p>
+                <h1
+                    class="font-neue text-7xl md:text-8xl tracking-widest title-glow text-cyan-glow"
+                >
+                    PAC-MAN
+                </h1>
+                <p class="font-press text-xs text-purple-glow opacity-70">
+                    — arcade edition —
+                </p>
+            </header>
+
+            <!-- ══ SCREEN 1: Username ══ -->
+            <section
+                id="username-screen"
+                class="card"
+                aria-label="Enter username"
+            >
+                <div class="how-to-box">
+                    <h2>HOW TO PLAY</h2>
+                    <p>
+                        🎮 Use <strong class="text-white">Arrow keys</strong> or
+                        <strong class="text-white">WASD</strong> to move.
+                    </p>
+                    <p>
+                        🟡 Eat all the
+                        <strong class="text-white">dots</strong> to clear the
+                        level.
+                    </p>
+                    <p>
+                        ⚡ Grab an
+                        <strong class="text-white">energizer</strong> (big dot)
+                        to eat ghosts!
+                    </p>
+                    <p>
+                        👻 Avoid the
+                        <strong class="text-white">ghosts</strong> — you have 3
+                        lives.
+                    </p>
+                    <p>
+                        🏆 Top scores go on the
+                        <strong class="text-white">leaderboard</strong>.
+                    </p>
+                </div>
+
+                <div class="input-row">
+                    <input
+                        type="text"
+                        id="username-input"
+                        placeholder="Your username..."
+                        maxlength="16"
+                        aria-label="Username"
+                    />
+                    <button class="btn-start" id="start-btn">Start!</button>
+                </div>
+            </section>
+
+            <!-- ══ SCREEN 2: Game ══ -->
+            <section
+                id="game-screen"
+                class="hidden flex-col items-center gap-4 w-full"
+                aria-label="Game"
+            >
+                <!-- Welcome + change user -->
+                <div
+                    class="flex items-center justify-between w-full max-w-[560px]"
+                >
+                    <p
+                        id="welcome-text"
+                        class="font-press text-[9px] text-purple-glow"
+                    ></p>
+                    <button
+                        id="change-user-btn"
+                        class="text-xs text-white/40 hover:text-white transition underline"
+                    >
+                        change user
+                    </button>
+                </div>
+
+                <!-- HUD -->
+                <div class="hud">
+                    <div class="hud-item">
+                        <span class="hud-label">Score</span>
+                        <span class="hud-value" id="hud-score">0</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Level</span>
+                        <span class="hud-value" id="hud-level">1</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Lives</span>
+                        <div class="lives-row" id="hud-lives"></div>
+                    </div>
+                </div>
+
+                <!-- Canvas -->
+                <div id="canvas-wrapper">
+                    <canvas id="game-canvas"></canvas>
+
+                    <!-- In-canvas overlay (start / win / lose) -->
+                    <div id="overlay">
+                        <span class="overlay-emoji" id="overlay-emoji">👾</span>
+                        <h2 class="overlay-title" id="overlay-title">
+                            PAC-MAN
+                        </h2>
+                        <p class="overlay-sub" id="overlay-sub">
+                            eat all the dots!
+                        </p>
+                        <button class="btn-primary" id="overlay-btn">
+                            START GAME
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile D-pad -->
+                <div id="mobile-controls" aria-label="Mobile controls">
+                    <div class="ctrl-row">
+                        <button class="ctrl-btn" id="ctrl-up">▲</button>
+                    </div>
+                    <div class="ctrl-row">
+                        <button class="ctrl-btn" id="ctrl-left">◀</button>
+                        <button class="ctrl-btn" id="ctrl-down">▼</button>
+                        <button class="ctrl-btn" id="ctrl-right">▶</button>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="leaderboard-box">
+                    <h2 class="font-neue text-xs text-yellow-brand mb-3">
+                        🏆 LEADERBOARD
+                    </h2>
+                    <ol
+                        id="leaderboard-list"
+                        class="flex flex-col gap-2 text-sm"
+                    ></ol>
+                </div>
+            </section>
+        </main>
+
+        <footer
+            id="site-footer"
+            class="bg-black text-white text-center py-4 mt-8"
+        ></footer>
+
+        <!-- Load order: shared scripts first, game last -->
+        <script src="../js/header.js"></script>
+        <script src="../js/footer.js"></script>
+        <script src="../js/nav.js"></script>
+        <script src="../js/leaderboard.js"></script>
+        <script src="../dist/pacman.js"></script>
+    </body>
+</html>

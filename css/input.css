@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@source "../*.html";
+@source "../pages/*.html";
+@source"../js/*.js";
+
+@theme {
+    --yellow-brand: #f4d35e;
+    --deep-dark-blue: #0b0f1a;
+    --cyan: #00e5ff;
+    --purple-glow: #7b61ff;
+    /*Font*/
+    --font-neue: "Bebas Neue", sans-serif;
+    --font-inter: "Inter", sans-serif;
+    --font-press: "Press Start 2P", system-ui;
+}

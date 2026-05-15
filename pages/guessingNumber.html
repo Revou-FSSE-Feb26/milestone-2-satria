@@ -3,162 +3,74 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Guessing Number</title>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="../css/output.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&display=swap"
             rel="stylesheet"
         />
-        <style type="text/tailwindcss">
-            @theme {
-                --yellow-brand: #f4d35e;
-                --gaming-black: #121212;
-                --neon-blue: #00d1ff;
-                --purple-glow: #7b61ff;
-                /*Font*/
-                --font-family-orbitron: "Orbitron", sans-serif;
-                --font-family-poppins: "Poppins", sans-serif;
-                --font-family-press-start: "Press Start 2P", cursive;
-            }
-        </style>
+        <title>Guessing Number — Revou Fun</title>
     </head>
-    <body class="bg-(--gaming-black) text-white min-h-screen flex flex-col">
-        <header class="bg-black text-white">
-            <div class="flex items-center justify-between px-4 py-4 md:px-8">
-                <div
-                    class="text-xl font-bold text-(--yellow-brand) font-[orbitron]"
-                >
-                    Revou Fun
-                </div>
+    <body
+        class="bg-(--deep-dark-blue) text-white min-h-screen flex flex-col font-inter"
+    >
+        <header id="site-header" class="bg-black text-white"></header>
 
-                <!-- Mobile menu toggle button -->
-                <button
-                    id="mobile-toggle"
-                    aria-label="toggle navigation"
-                    class="md:hidden flex flex-col gap-1.5 gap-2"
-                >
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                    <span class="block w-6 h-0.5 bg-white"></span>
-                </button>
-
-                <nav class="hidden md:flex gap-6 items-center">
-                    <a
-                        href="../index.html#hero"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Home</a
-                    >
-                    <a
-                        href="../index.html#games"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Games</a
-                    >
-                    <a
-                        href="../index.html#about"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >About Us</a
-                    >
-                    <a
-                        href="../index.html#feature"
-                        class="hover:text-(--yellow-brand) transition-colors"
-                        >Features</a
-                    >
-                    <a
-                        href="../index.html#news"
-                        class="hover:text-(--yellow-brand)"
-                        >News</a
-                    >
-                    <button
-                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl hover:brightness-110 transition font-medium"
-                    >
-                        Play Now!
-                    </button>
-                </nav>
-            </div>
-            <!-- Desktop navbar -->
-            <div
-                id="nav-mobile"
-                class="hidden flex-col bg-black px-4 pb-4 md:hidden text-white"
-                style="display: none;"
-            >
-                <a
-                    href="../index.html#hero"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Home</a
-                >
-                <a
-                    href="../index.html#games"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Games</a
-                >
-                <a
-                    href="../index.html#about"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >About Us</a
-                >
-                <a
-                    href="../index.html#feature"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >Features</a
-                >
-                <a
-                    href="../index.html#news"
-                    class="py-2 border-b border-gray-700 hover:text-(--yellow-brand)"
-                    >News</a
-                >
-                <button
-                    class="mt-4 bg-(--yellow-brand) text-black py-2 rounded-xl font-medium hover:brightness-110 transition"
-                >
-                    Play Now!
-                </button>
-            </div>
-        </header>
-
-        <main class="flex flex-col items-center justify-center px-4 py-12">
-            <!--Username-->
+        <main
+            class="flex-1 flex flex-col items-center justify-center px-4 py-12"
+        >
+            <!-- Username Screen -->
             <div
                 id="username"
-                class="bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+                class="bg-[#FFFFFF05] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
             >
                 <div class="text-center">
+                    <p class="font-press text-(--cyan) text-[8px]">
+                        // guess the number //
+                    </p>
                     <h1
-                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                        class="font-neue text-xl font-bold text-(--purple-glow) text-[1.75rem]"
                     >
                         Guessing Number
                     </h1>
                     <p class="text-gray-400 text-sm mt-1">
                         Guess a number between 1 to 100
                     </p>
-
                     <p class="text-gray-400 text-sm mt-1">
-                        Enter Your Username
+                        Enter your username to start
                     </p>
                 </div>
 
                 <div
-                    class="bg-[#121212] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
+                    class="bg-[#FFFFFF07] border border-gray-700 rounded-xl p-4 flex flex-col gap-2"
                 >
-                    <h2 class="font-[orbitron] text-xs text-(--neon-blue) mb-1">
+                    <h2 class="font-neue text-xs text-(--cyan) mb-1">
                         HOW TO PLAY
                     </h2>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p
+                        class="text-gray-400 color-[#FFFFFF80] text-xs leading-relaxed"
+                    >
                         A random number between
                         <strong class="text-white">1 and 100</strong> is
                         generated.
                     </p>
-                    <p class="text-gray-400 text-xs leading-relaxed">
-                        If you guess is too low or too high, you'll get a hint.
+                    <p
+                        class="text-gray-400 color-[#FFFFFF80] text-xs leading-relaxed"
+                    >
+                        If your guess is too low or too high, you'll get a hint.
                     </p>
-                    <p class="text-gray-400 text-xs leading-relaxed">
+                    <p
+                        class="text-gray-400 color-[#FFFFFF80] text-xs leading-relaxed"
+                    >
                         You have
-                        <strong class="text-white">5 Attempts</strong> to guess
+                        <strong class="text-white">5 attempts</strong> to guess
                         correctly.
                     </p>
-                    <p class="text-gray-400 text-xs leading-relaxed">
-                        Guess it right to earn a point and beat the
-                        leaderboard!.
+                    <p
+                        class="text-gray-400 color-[#FFFFFF80] text-xs leading-relaxed"
+                    >
+                        Guess it right to earn a point and beat the leaderboard!
                     </p>
                 </div>
 
@@ -166,7 +78,7 @@
                     <input
                         type="text"
                         id="usernameInput"
-                        placeholder="Your Username..."
+                        placeholder="Your username..."
                         maxlength="16"
                         class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
                     />
@@ -179,19 +91,21 @@
                 </div>
             </div>
 
-            <!-- Games -->
+            <!-- Game Screen -->
             <div
                 id="gameScreen"
-                class="hidden bg-[#1E1E1E] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
+                class="hidden bg-[#FFFFFF05] border border-gray-700 rounded-2xl p-8 w-full max-w-md flex flex-col gap-6"
             >
                 <div class="text-center">
-                    <h1
-                        class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
-                    >
-                        Guessing Number
-                    </h1>
-                    <p id="welcomeText" class="text-gray-400 text-sm mt-1"></p>
+                    <p class="font-press text-(--cyan) text-[8px]">// round in progress //</p>
+                    <h1 class="font-neue text-xl font-bold text-(--purple-glow)">Guessing Number</h1>
+                    <p
+                        id="welcomeText"
+                        class="text-gray-400 text-sm mt-1"
+                    ></p>
                 </div>
+
+                <!-- Input -->
                 <div class="flex gap-2">
                     <input
                         type="number"
@@ -199,53 +113,38 @@
                         placeholder="Enter your guess..."
                         class="flex-1 bg-[#121212] border border-gray-600 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-(--neon-blue) transition placeholder-gray-600"
                     />
-                    <button
-                        id="guessButton"
-                        class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition"
-                    >
-                        Submit Guess
-                    </button>
+                    <button id="guessButton" class="bg-(--yellow-brand) text-black px-4 py-2 rounded-xl font-medium text-sm hover:brightness-110 transition">Submit</button>
                 </div>
 
+                <!-- Result -->
                 <div
                     id="resultDisplay"
-                    class="text-center text-sm font-medium text-gray-400 min-h-[24px]"
+                    class="status-bar text-sm font-medium"
                 ></div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div
-                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
-                    >
-                        <div id="attemptDisplay">
-                            <div class="text-xs text-gray-500 mb-1">
-                                Attempts left
-                            </div>
-                            <div
-                                id="attemptCount"
-                                class="font-[orbitron] text-xl font-bold text-(--neon-blue)"
-                            >
-                                5
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-[#121212] border border-gray-700 rounded-xl p-3 text-center"
-                    >
-                        <div class="text-xs text-gray-500 mb-1">Score</div>
+                <!-- Stats -->
+                <div class="grid grid-cols-2 gap-3 w-full">
+                    <div class="bg-[#7B61FF0F] border border-gray-700 rounded-xl p-3 text-center">
                         <div
-                            id="scoreDisplay"
-                            class="font-[orbitron] text-xl font-bold text-(--yellow-brand)"
+                            class="text-xs text-gray-500 mb-1"
                         >
-                            0
+                            Attempts Left
                         </div>
+                        <div id="attemptCount" class="font-neue text-xl font-bold text-(--cyan)">5</div>
+                    </div>
+                    <div class="bg-[#7B61FF0F] border border-gray-700 rounded-xl p-3 text-center">
+                        <div
+                            class="text-xs text-gray-500 mb-1"
+                        >
+                            Score
+                        </div>
+                        <div id="scoreDisplay" class="font-neue text-xl font-bold text-(--yellow-brand)">0</div>
                     </div>
                 </div>
+
+                <!-- Leaderboard -->
                 <div class="bg-[#121212] border border-gray-700 rounded-xl p-4">
-                    <h2
-                        class="font-[orbitron] text-xs text-(--yellow-brand) mb-3"
-                    >
-                        LEADERBOARD
-                    </h2>
+                    <h2 class="font-neue text-xs text-(--yellow-brand) mb-3">LEADERBOARD</h2>
                     <ol
                         id="leaderboardList"
                         class="flex flex-col gap-2 text-sm"
@@ -253,11 +152,14 @@
                 </div>
             </div>
         </main>
-        <footer class="bg-black text-white text-center py-4 mt-12">
-            <div class="text-gray-400 text-sm">
-                &copy; 2026 Satria Pamungkas. All Right Reserved.
-            </div>
-        </footer>
+
+        <footer
+            id="site-footer"
+            class="bg-black text-white text-center py-4 mt-12"
+        ></footer>
+
+        <script src="../js/header.js"></script>
+        <script src="../js/footer.js"></script>
         <script src="../js/nav.js"></script>
         <script src="../js/username.js"></script>
         <script src="../js/leaderboard.js"></script>
